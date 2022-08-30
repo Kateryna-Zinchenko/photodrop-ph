@@ -1,5 +1,25 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+  overflow: hidden;
+`;
+
+export const LogoWrapper = styled.div`
+  border-bottom: 1px solid #F1F0EC;
+  padding: 0 0 18px;
+`;
+
+export const Logo = styled.img`
+  width: 125px;
+  height: 16px;
+  cursor: pointer;
+  margin: 20px auto 0;
+`;
+
+export const Form = styled.div`
+  
+`;
+
 export const Input = styled.input`
   background: #F4F4F4;
   border: 1px solid #EEEEEE;
@@ -21,21 +41,4 @@ export const Input = styled.input`
   &:first-child {
     margin: 200px auto 0;
   }
-`;
-
-export const Button = styled.button`
-  display: block;
-  width: 345px;
-  height: 50px;
-  background: #3300CC;
-  border: none;
-  border-radius: 50px;
-  margin: 20px auto 0;
-  //font-family: 'Futura PT';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 23px;
-  text-align: center;
-  color: #FFFFFF;
 `;

@@ -1,20 +1,25 @@
-import React, {useEffect} from 'react';
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
-import Header from "./components/common/header/Header";
-import Login from "./components/screens/Login/Login";
+import React from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Login from "./components/pages/Login/Login";
+import Albums from "./components/pages/Albums/Albums";
+import { Provider } from 'react-redux';
+import store from './store';
+
+export type AppDispatch = typeof store.dispatch;
 
 function App() {
 
     return (
-        <div className="App">
-            <Header/>
-            <Login/>
-            {/*<BrowserRouter>*/}
-            {/*    <Routes>*/}
-            {/*        <Route path='/login' element={<Login/>}/>*/}
-            {/*    </Routes>*/}
-            {/*</BrowserRouter>*/}
-        </div>
+        <Provider store={store}>
+            <BrowserRouter>
+                <div className="App">
+                    <Routes>
+                        <Route path='/' element={<Login/>}/>
+                        <Route path='/albums' element={<Albums/>}/>
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </Provider>
     );
 }
 

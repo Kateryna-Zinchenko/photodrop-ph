@@ -3,13 +3,15 @@ import styled from 'styled-components';
 
 type Props = {
     children: React.ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
-                    children
+                    children,
+                    onClick
                 }: Props) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={onClick}>
             {children}
         </Wrapper>
     );
@@ -17,7 +19,7 @@ const Button = ({
 
 export default Button;
 
-const Wrapper = styled.div`
+const Wrapper = styled.button<Props>`
   display: block;
   width: 345px;
   height: 50px;
@@ -33,4 +35,5 @@ const Wrapper = styled.div`
   line-height: 23px;
   text-align: center;
   color: #FFFFFF;
+  cursor: pointer;
 `;
