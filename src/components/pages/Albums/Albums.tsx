@@ -1,6 +1,21 @@
 import React from 'react';
-import {AlbumInfo, AlbumLocation, AlbumName, AlbumWrapper, Icon, Logo, LogoWrapper, Wrapper} from "./AlbumsStyles";
-import { useNavigate } from 'react-router-dom';
+import {
+    AddButton,
+    AlbumInfo,
+    AlbumLocation,
+    AlbumName,
+    AlbumsWrapper,
+    AlbumWrapper,
+    ArrowRight,
+    ButtonWrapper,
+    Icon,
+    Logo,
+    LogoWrapper
+} from "./AlbumsStyles";
+//import IoIosPhotos from 'react-icons/io';
+import {useNavigate} from 'react-router-dom';
+import AlbumsIcon from "./AlbumsIcon";
+//import { IconContext } from 'react-icons';
 
 const Albums = () => {
     const nav = useNavigate();
@@ -14,15 +29,21 @@ const Albums = () => {
             <LogoWrapper>
                 <Logo src='/assets/images/logo.png' onClick={handleClick}/>
             </LogoWrapper>
-            <Wrapper>
+            <AlbumsWrapper>
                 <AlbumWrapper>
-                    <Icon/>
+                    <Icon>
+                        <AlbumsIcon/>
+                    </Icon>
                     <AlbumInfo>
-                        <AlbumName>Summer</AlbumName>
-                        <AlbumLocation>Kyiv</AlbumLocation>
+                        <AlbumName>Title</AlbumName>
+                        <AlbumLocation>Location</AlbumLocation>
                     </AlbumInfo>
+                    <ArrowRight/>
                 </AlbumWrapper>
-            </Wrapper>
+            </AlbumsWrapper>
+            {/*<ButtonWrapper>*/}
+                <AddButton>+</AddButton>
+            {/*</ButtonWrapper>*/}
         </main>
     );
 };

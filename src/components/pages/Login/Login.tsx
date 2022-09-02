@@ -55,7 +55,7 @@ const Login = () => {
                         value={password}
                         type="password"
                     />
-                    <Button onClick={onSignInClick}>Login</Button>
+                    <Button onClick={onSignInClick}>Sign in</Button>
                 </Form>
             </Wrapper>
         </main>

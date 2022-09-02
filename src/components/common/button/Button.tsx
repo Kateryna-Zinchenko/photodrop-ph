@@ -28,7 +28,7 @@ const Wrapper = styled.button<Props>`
   border-radius: 50px;
   margin: 20px auto 0;
   padding: 14px 0;
-  //font-family: 'Futura PT';
+  font-family: 'Futura PT Medium',serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

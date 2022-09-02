@@ -2,33 +2,68 @@ import styled from 'styled-components';
 
 export const LogoWrapper = styled.div`
   border-bottom: 1px solid #F1F0EC;
-  padding: 0 0 18px;
+  padding: 20px 0 18px;
+  position: relative;
 `;
 
 export const Logo = styled.img`
   width: 125px;
   height: 16px;
   cursor: pointer;
-  margin: 20px auto 0;
+  margin: 0 auto;
 `;
 
-export const Wrapper = styled.div`
+export const ButtonWrapper = styled.div`
+  border-top: 1px solid #F1F0EC;
+  padding: 20px 0 0;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+`;
+
+export const AddButton = styled.button`
+  width: 44px;
+  height: 44px;
+  border: 1px solid #000;
+  border-radius: 50px;
+  background: #3300CC;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  
+  &:hover {
+    background: #F4F4F4;
+  }
+`;
+
+export const AlbumsWrapper = styled.div`
   margin: 20px 0 0;
-  padding: 0 20px;
+  padding: 0 15px;
 `;
 
 export const AlbumWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 15px 15px;
-  border: 1px solid lightgray;
-  border-radius: 15px;
+  border: 1px solid #CECCB5;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
 `;
 
 export const Icon = styled.div`
-  width: 50px;
-  height: 30px;
   border: 1px solid grey;
+  border-radius: 5px;
+  padding: 8px 12px;
 `;
 
 export const AlbumInfo = styled.div`
@@ -36,9 +71,22 @@ export const AlbumInfo = styled.div`
 `;
 
 export const AlbumName = styled.div`
+  font-family: 'Futura PT Medium',serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+`;
+
+export const AlbumLocation = styled(AlbumName)`
   
 `;
 
-export const AlbumLocation = styled.div`
-  
+export const ArrowRight = styled.div`
+  background: url("/assets/icons/arrow-right.png") no-repeat;
+  background-size: contain;
+  width: 8px;
+  height: 16px;
+  position: absolute;
+  right: 15px;
 `;

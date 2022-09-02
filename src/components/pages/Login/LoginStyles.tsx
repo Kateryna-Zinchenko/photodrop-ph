@@ -17,7 +17,7 @@ export const Logo = styled.img`
 `;
 
 export const Form = styled.div`
-  
+  margin: 190px 0 0;
 `;
 
 export const Input = styled.input`
@@ -28,7 +28,7 @@ export const Input = styled.input`
   padding: 0 13px;
   width: 345px;
   height: 40px;
-  //font-family: 'Futura PT';
+  font-family: 'Futura PT Light',serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -39,6 +39,6 @@ export const Input = styled.input`
   margin: 20px auto 0;
   
   &:first-child {
-    margin: 200px auto 0;
+    margin: 0 auto;
   }
 `;

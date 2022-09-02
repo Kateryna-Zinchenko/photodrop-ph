@@ -1,2 +1,23 @@
 @import './normalize.css';
 @import './reset.css';
+
+@font-face {
+    font-family: 'Helvetica LT Std Light';
+    src: url('./fonts/HelveticaLTStd-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Futura PT Light';
+    src: url('./fonts/FuturaPT-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Futura PT Medium';
+    src: url('./fonts/FuturaPT-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
