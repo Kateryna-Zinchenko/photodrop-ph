@@ -1,13 +1,7 @@
 import HttpClient from "./http-client";
 
 export interface LoginResponse {
-    token: string;
-    user_data: {
-        id: null,
-        login: null,
-        fullname: null,
-        email: null
-    }
+    token: string
 }
 
 class Main extends HttpClient {
@@ -27,7 +21,6 @@ class Main extends HttpClient {
 
     public login = (data: {login: string, password: string}) =>
         this.instance.post<LoginResponse>("/auth/login", data);
-
 }
 
 export default Main;

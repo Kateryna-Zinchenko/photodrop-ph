@@ -31,7 +31,6 @@ class TokensLocalStorage extends LocalStorage<Locals> {
     this.set(Locals.ACCESS_TOKEN, accessToken);
   }
 
-
   public setUser(user: any) {
     this.set(Locals.user, user.id);
   }

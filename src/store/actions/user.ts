@@ -6,7 +6,7 @@ import TokensLocalStorage from "../../utils/local-storage/TokensLocalStorage";
 export const userActions = createActionCreators(User);
 
 export type UserActions = ReturnType<typeof userActions.setAuth
-    | typeof userActions.setUser>
+    | typeof userActions.getAlbums>
 
 export const setAuthData =
     (login: string, password: string): AsyncAction =>
@@ -25,9 +25,8 @@ export const setAuthData =
                 } else {
                     console.log('Error')
                 }
-            } catch (e) {
-                console.log(e);
-            }
+            } catch (e: any) {
+                dispatch(e)            }
         };
 
 export const setAuth =
@@ -40,4 +39,3 @@ export const setAuth =
                 dispatch(e)
             }
         };
-

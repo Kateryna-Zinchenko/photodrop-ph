@@ -15,4 +15,7 @@ export default class MainProtected extends HttpClientProtected {
 
         return MainProtected.instanceCached;
     };
+
+    public getAlbums = (token: any) =>
+        this.instance.get<any>(`/albums`);
 }

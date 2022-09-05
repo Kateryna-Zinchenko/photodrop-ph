@@ -7,30 +7,34 @@ import {
     AlbumsWrapper,
     AlbumWrapper,
     ArrowRight,
-    ButtonWrapper,
     Icon,
     Logo,
     LogoWrapper
 } from "./AlbumsStyles";
-//import IoIosPhotos from 'react-icons/io';
 import {useNavigate} from 'react-router-dom';
 import AlbumsIcon from "./AlbumsIcon";
-//import { IconContext } from 'react-icons';
+import {useSelector} from 'react-redux';
 
 const Albums = () => {
     const nav = useNavigate();
+    const albums = useSelector((state: any) => state.userReducer.albums)
 
-    const handleClick = () => {
+    const handleLogoClick = () => {
         nav('/')
+    }
+
+    const handleAddClick = () => {
+        nav('/album')
     }
 
     return (
         <main className='albums'>
             <LogoWrapper>
-                <Logo src='/assets/images/logo.png' onClick={handleClick}/>
+                <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
             </LogoWrapper>
             <AlbumsWrapper>
-                <AlbumWrapper>
+                {
+                    albums.map((album: any) => <AlbumWrapper key={album.id}>
                     <Icon>
                         <AlbumsIcon/>
                     </Icon>
@@ -39,11 +43,10 @@ const Albums = () => {
                         <AlbumLocation>Location</AlbumLocation>
                     </AlbumInfo>
                     <ArrowRight/>
-                </AlbumWrapper>
+                </AlbumWrapper>)
+                }
             </AlbumsWrapper>
-            {/*<ButtonWrapper>*/}
-                <AddButton>+</AddButton>
-            {/*</ButtonWrapper>*/}
+            <AddButton onClick={handleAddClick}>+</AddButton>
         </main>
     );
 };

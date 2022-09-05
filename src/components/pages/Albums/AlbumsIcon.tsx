@@ -11,4 +11,4 @@ class AlbumsIcon extends Component {
     }
 }
 
-export default AlbumsIcon
+export default AlbumsIcon;
