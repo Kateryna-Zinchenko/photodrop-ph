@@ -10,10 +10,10 @@ type Props = {
     setIsOpen?: any,
 }
 
-const AlbumStyles = ({setIsOpen}: Props) => {
+const AlbumModal = ({setIsOpen}: Props) => {
     const [name, setName] = useState<string>("");
     const [location, setLocation] = useState<string>("");
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState<number>(0);
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -26,7 +26,8 @@ const AlbumStyles = ({setIsOpen}: Props) => {
     };
 
     const onDateChange = (e: React.FormEvent<HTMLInputElement>) => {
-        setDate(date);
+        setDate(Number(new Date(e.currentTarget.value).valueOf()));
+        console.log(Number(new Date(e.currentTarget.value).valueOf()))
     };
 
     const onSaveClick = async () => {
@@ -64,4 +65,4 @@ const AlbumStyles = ({setIsOpen}: Props) => {
     );
 };
 
-export default AlbumStyles;
+export default AlbumModal;

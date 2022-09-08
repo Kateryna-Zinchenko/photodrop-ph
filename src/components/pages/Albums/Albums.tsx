@@ -17,7 +17,7 @@ import AlbumsIcon from "./AlbumsIcon";
 import {useDispatch, useSelector} from 'react-redux';
 import {getAlbums} from "../../../store/actions/user";
 import {AppDispatch} from "../../../App";
-import Album from "../AlbumModal/AlbumModal";
+import AlbumModal from "../AlbumModal/AlbumModal";
 
 const Albums = () => {
     const nav = useNavigate();
@@ -37,17 +37,18 @@ const Albums = () => {
     return (
         <main className='albums'>
             <ModalWrapper isOpen={isOpen}>
-                <Album setIsOpen={setIsOpen}/>
+                <AlbumModal setIsOpen={setIsOpen}/>
             </ModalWrapper>
             <LogoWrapper>
                 <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
             </LogoWrapper>
             <AlbumsWrapper>
-                {albums && albums.map((album: any) => <AlbumWrapper key={album.id}
-                                                                    onClick={() => {
-                                                                        nav(`/album=${album.id}`)
-                                                                        console.log(album.id)
-                                                                    }}>
+                {albums && albums.map((album: any) =>
+                    <AlbumWrapper key={album.id}
+                                  onClick={() => {
+                                      nav(`/album=${album.id}`)
+                                      console.log(album.id)
+                                  }}>
                         <Icon>
                             <AlbumsIcon/>
                         </Icon>

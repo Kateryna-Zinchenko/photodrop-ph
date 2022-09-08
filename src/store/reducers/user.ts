@@ -13,7 +13,7 @@ interface UserState {
   album: {
     name: string | null,
     location: string | null,
-    date: string | null,
+    date: number | null,
     id: string | null
   }
 }

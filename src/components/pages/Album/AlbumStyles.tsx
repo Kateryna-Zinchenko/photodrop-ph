@@ -1,5 +1,30 @@
 import styled from "styled-components";
 
+export const OpenedImageWrapper = styled.div<{ isOpen: boolean }>`
+  display: ${({isOpen}) => isOpen ? 'flex' : 'none'};
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(124, 124, 124, 0.3);
+  //backdrop-filter: blur(2px);
+  z-index: 3;
+`;
+
+export const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background: #000;
+`;
+
+export const OpenedImage = styled.div`
+  z-index: 1;
+  max-width: 30%;
+`;
+
 export const LogoWrapper = styled.div`
   border-bottom: 1px solid #F1F0EC;
   padding: 20px 0 18px;
@@ -57,10 +82,6 @@ export const Input = styled.input`
 `;
 
 export const Images = styled.div`
-  //display: flex;
-  //justify-content: center;
-  //flex-wrap: wrap;
-  //margin: 20px 0 0;
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -69,23 +90,15 @@ export const Images = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   height: 100%;
-  overflow: hidden;
+  //overflow: hidden;
 `;
 
 export const ImgWrapper = styled.div`
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: center;
-  //align-items: center;
-  //width: fit-content;
-  //height: fit-content;
-  ////margin: 15px 15px 0;
   position: relative;
   height: 33.33vw;
   object-fit: cover;
   max-width: 33.33%;
   flex: 0 1 33.33333%;
-  cursor: pointer;
   background: #d3d3d3;
   width: 100%;
 `;
@@ -111,6 +124,15 @@ export const CloseWrapper = styled.div`
   right: 2px;
   background: #FFF;
   border-radius: 50%;
+  cursor: pointer;
+`;
+
+export const CloseWrapper1 = styled(CloseWrapper)`
+  background: none;
+  width: 28px;
+  height: 28px;
+  top: 16px;
+  right: 16px;
 `;
 
 export const CloseButton = styled.div`
@@ -121,7 +143,6 @@ export const CloseButton = styled.div`
   background: #5C5C5C;
   border-radius: 100px;
   //transform: rotate(45deg);
-  cursor: pointer;
 
   //&:before {
   //  position: absolute;
@@ -148,4 +169,37 @@ export const CloseButton = styled.div`
   //  margin: 0;
   //  border-radius: 100px;
   //}
+`;
+
+export const CloseButton1 = styled.div`
+  display: flex;
+  position: relative;
+  border-radius: 100px;
+  transform: rotate(45deg);
+
+  &:before {
+    position: absolute;
+    width: 2px;
+    height: 22px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    background: #fff;
+    margin: 0;
+    border-radius: 100px;
+  }
+
+  &:after {
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    background: #fff;
+    margin: 0;
+    border-radius: 100px;
+  }
 `;

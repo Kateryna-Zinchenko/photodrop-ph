@@ -55,25 +55,25 @@ export const getAlbums =
         };
 
 export const addAlbum =
-    (title: string, location: string, date: any): AsyncAction =>
+    (title: string, location: string, date: number): AsyncAction =>
         async (dispatch, _, {mainProtectedApi}) => {
             try {
                 const data = {title: title, location: location, date: date};
                 const response = await mainProtectedApi.addAlbum(data);
-                console.log(response)
+                console.log(data)
             } catch (e: any) {
                 dispatch(e)
             }
         };
 
-export const getPhotos =
-    (albumId: string): AsyncAction =>
-        async (dispatch, _, {mainProtectedApi}) => {
-            try {
-                const response = await mainProtectedApi.getPhotos(albumId);
-                dispatch(userActions.getPhotos(response))
-                console.log(response)
-            } catch (e: any) {
-                dispatch(e)
-            }
-        };
+// export const getPhotos =
+//     (albumId: string): AsyncAction =>
+//         async (dispatch, _, {mainProtectedApi}) => {
+//             try {
+//                 const response = await mainProtectedApi.getPhotos(albumId);
+//                 dispatch(userActions.getPhotos(response))
+//                 console.log(response)
+//             } catch (e: any) {
+//                 dispatch(e)
+//             }
+//         };

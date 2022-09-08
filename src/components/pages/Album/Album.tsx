@@ -1,28 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {useToggle} from 'react-use';
 import {
     ArrowBack,
-    CloseButton,
-    CloseWrapper,
+    CloseButton, CloseButton1,
+    CloseWrapper, CloseWrapper1,
     Images,
     Img,
     ImgWrapper,
     Input,
     Label,
     Logo,
-    LogoWrapper
+    LogoWrapper, OpenedImage, OpenedImageWrapper, Wrapper
 } from './AlbumStyles';
-import {AppDispatch} from "../../../App";
-import { useDispatch, useSelector } from 'react-redux';
 import Button from "../../common/button/Button";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
+
 const Album = () => {
-    const [selectedImages, setSelectedImages] = useState([]);
+    const [selectedImages, setSelectedImages] = useState<any>([]);
+    const [openedImages, setOpenedImages] = useState([]);
+    const [isOpen, setIsOpen] = useToggle(false);
 
     const nav = useNavigate();
-
-    const dispatch = useDispatch<AppDispatch>();
-
-    const albums = useSelector((state: any) => state.userReducer.albums);
 
     const handleLogoClick = () => {
         nav('/')
@@ -39,11 +38,26 @@ const Album = () => {
             return URL.createObjectURL(file);
         });
 
-        setSelectedImages(imagesArray);
+        setSelectedImages(selectedImages.concat(imagesArray));
     }
 
     return (
         <main className='album'>
+            <OpenedImageWrapper isOpen={isOpen}>
+                <Wrapper onClick={() => setIsOpen(false)}/>
+                <CloseWrapper1 onClick={() => setIsOpen(false)}>
+                    <CloseButton1/>
+                </CloseWrapper1>
+                {openedImages.map((image: any) => {
+                    return (
+                        <OpenedImage>
+                            <img key={image} src={image}/>
+                        </OpenedImage>
+
+                    )
+                })}
+
+            </OpenedImageWrapper>
             <LogoWrapper>
                 <ArrowBack onClick={handleBackClick}/>
                 <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
@@ -64,11 +78,17 @@ const Album = () => {
                 {selectedImages && selectedImages.map((image: any) => {
                     return (
                         <ImgWrapper>
-                            <CloseWrapper onClick={() =>
-                                setSelectedImages(selectedImages.filter((e) => e !== image))}>
+                            <CloseWrapper onClick={() => {
+                                setSelectedImages(selectedImages.filter((e: any) => e !== image))
+                            }}>
                                 <CloseButton/>
                             </CloseWrapper>
-                            <Img key={image} src={image}/>
+                            <Img key={image} src={image}
+                                 onClick={() => {
+                                     setIsOpen()
+                                     setOpenedImages(selectedImages.filter((e: any) => e === image))
+                                 }}
+                            />
                         </ImgWrapper>
                     )
                 })}

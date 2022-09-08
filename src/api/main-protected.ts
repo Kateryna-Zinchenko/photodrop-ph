@@ -19,9 +19,6 @@ export default class MainProtected extends HttpClientProtected {
     public getAlbums = () =>
         this.instance.get<any>(`/albums`);
 
-    public addAlbum = (data: {title: string, location: string, date: any}) =>
+    public addAlbum = (data: {title: string, location: string, date: number}) =>
         this.instance.post<any>(`/albums`, data);
-
-    public getPhotos = (albumId: string) =>
-        this.instance.get<any>(`/photos/album?id=${albumId}`);
 }
