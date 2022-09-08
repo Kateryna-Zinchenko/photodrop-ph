@@ -21,6 +21,7 @@ class Main extends HttpClient {
 
     public login = (data: {login: string, password: string}) =>
         this.instance.post<LoginResponse>("/auth/login", data);
+
 }
 
 export default Main;

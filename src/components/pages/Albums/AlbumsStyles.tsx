@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+export const ModalWrapper = styled.div<{ isOpen: boolean }>`
+  display: ${({isOpen}) => isOpen ? 'flex' : 'none'};
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(124, 124, 124, 0.3);
+  //backdrop-filter: blur(2px);
+  z-index: 3;
+`;
+
 export const LogoWrapper = styled.div`
   border-bottom: 1px solid #F1F0EC;
   padding: 20px 0 18px;
@@ -26,7 +38,7 @@ export const ButtonWrapper = styled.div`
 export const AddButton = styled.button`
   width: 44px;
   height: 44px;
-  border: 1px solid #000;
+  border: none;
   border-radius: 50px;
   background: #3300CC;
   color: #FFF;
@@ -39,10 +51,6 @@ export const AddButton = styled.button`
   bottom: 20px;
   left: 50%;
   transform: translate(-50%, 0);
-  
-  &:hover {
-    background: #F4F4F4;
-  }
 `;
 
 export const AlbumsWrapper = styled.div`
@@ -53,11 +61,16 @@ export const AlbumsWrapper = styled.div`
 export const AlbumWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 15px 0 0;
   padding: 15px 15px;
   border: 1px solid #CECCB5;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
+
+  &:first-child {
+    margin: 0;
+  }
 `;
 
 export const Icon = styled.div`
@@ -71,7 +84,7 @@ export const AlbumInfo = styled.div`
 `;
 
 export const AlbumName = styled.div`
-  font-family: 'Futura PT Medium',serif;
+  font-family: 'Futura PT Medium', serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -79,7 +92,7 @@ export const AlbumName = styled.div`
 `;
 
 export const AlbumLocation = styled(AlbumName)`
-  
+
 `;
 
 export const ArrowRight = styled.div`

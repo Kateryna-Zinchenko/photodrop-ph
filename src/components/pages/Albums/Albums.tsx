@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useToggle} from 'react-use';
 import {
     AddButton,
     AlbumInfo,
@@ -9,46 +10,59 @@ import {
     ArrowRight,
     Icon,
     Logo,
-    LogoWrapper
+    LogoWrapper, ModalWrapper
 } from "./AlbumsStyles";
 import {useNavigate} from 'react-router-dom';
 import AlbumsIcon from "./AlbumsIcon";
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAlbums} from "../../../store/actions/user";
+import {AppDispatch} from "../../../App";
+import Album from "../AlbumModal/AlbumModal";
 
 const Albums = () => {
     const nav = useNavigate();
-    const albums = useSelector((state: any) => state.userReducer.albums)
-
+    const albums = useSelector((state: any) => state.userReducer.albums);
+    const dispatch = useDispatch<AppDispatch>();
+    const [isOpen, setIsOpen] = useToggle(false);
+    useEffect(() => {
+        dispatch(getAlbums());
+    }, [])
     const handleLogoClick = () => {
-        nav('/')
+        nav('/');
     }
-
     const handleAddClick = () => {
-        nav('/album')
+        setIsOpen(true);
     }
-
+    console.log()
     return (
         <main className='albums'>
+            <ModalWrapper isOpen={isOpen}>
+                <Album setIsOpen={setIsOpen}/>
+            </ModalWrapper>
             <LogoWrapper>
                 <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
             </LogoWrapper>
             <AlbumsWrapper>
-                {
-                    albums.map((album: any) => <AlbumWrapper key={album.id}>
-                    <Icon>
-                        <AlbumsIcon/>
-                    </Icon>
-                    <AlbumInfo>
-                        <AlbumName>Title</AlbumName>
-                        <AlbumLocation>Location</AlbumLocation>
-                    </AlbumInfo>
-                    <ArrowRight/>
-                </AlbumWrapper>)
-                }
+                {albums && albums.map((album: any) => <AlbumWrapper key={album.id}
+                                                                    onClick={() => {
+                                                                        nav(`/album=${album.id}`)
+                                                                        console.log(album.id)
+                                                                    }}>
+                        <Icon>
+                            <AlbumsIcon/>
+                        </Icon>
+                        <AlbumInfo>
+                            <AlbumName>{album.title}</AlbumName>
+                            <AlbumLocation>{album.location}</AlbumLocation>
+                        </AlbumInfo>
+                        <ArrowRight/>
+                    </AlbumWrapper>
+                )}
             </AlbumsWrapper>
             <AddButton onClick={handleAddClick}>+</AddButton>
         </main>
     );
 };
-
 export default Albums;
+
+

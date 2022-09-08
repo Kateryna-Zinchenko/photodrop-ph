@@ -31,7 +31,7 @@ const Login = () => {
 
     useEffect(() => {
             if (isAuth) {
-                nav('/albums');
+                nav('/');
             }
         }
     )
