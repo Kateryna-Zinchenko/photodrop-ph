@@ -12,7 +12,8 @@ type Props = {
     color?: string,
     background?: string,
     border?: string,
-    cursorNone?: boolean
+    cursorNone?: boolean,
+    z_index?: string
 }
 
 const Button = ({
@@ -26,11 +27,13 @@ const Button = ({
                     color,
                     background,
                     border,
-                    cursorNone
+                    cursorNone,
+                    z_index
                 }: Props) => {
     return (
         <Wrapper onClick={onClick} position={position} margin={margin} bottom={bottom} transform={transform}
                  left={left} color={color} background={background} border={border} cursorNone={cursorNone}
+                 z_index={z_index}
         >
             {children}
         </Wrapper>
@@ -60,4 +63,5 @@ const Wrapper = styled.button<Props>`
   bottom: ${({bottom}) => bottom ? bottom : 'unset'};
   left: ${({left}) => left ? left : 'unset'};
   transform: ${({transform}) => transform ? transform : 'unset'};
+  z-index: ${({z_index}) => z_index ? z_index : 'unset'};
 `;

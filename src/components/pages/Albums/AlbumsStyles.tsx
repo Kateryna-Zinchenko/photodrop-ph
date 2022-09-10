@@ -7,8 +7,7 @@ export const ModalWrapper = styled.div<{ isOpen: boolean }>`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(124, 124, 124, 0.3);
-  //backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 3;
 `;
 
@@ -54,8 +53,9 @@ export const AddButton = styled.button`
 `;
 
 export const AlbumsWrapper = styled.div`
-  margin: 20px 0 0;
+  margin: 20px auto 0;
   padding: 0 15px;
+  max-width: 768px;
 `;
 
 export const AlbumWrapper = styled.div`

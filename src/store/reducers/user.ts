@@ -1,39 +1,32 @@
 import { createReducerFunction, ImmerReducer } from "immer-reducer";
+import {getUsers} from "../actions/user";
 
 interface UserState {
   isAuth: boolean;
   user: {
-    id: string | null,
-    login: string | null,
-    email: string | null,
-    name: string | null,
+    id: string | null;
+    phone: string | null;
+    fullName: string | null;
+    email: string | null;
+    avatar: any | null
   };
+  users: any;
   albums: any;
   photos: any;
-  album: {
-    name: string | null,
-    location: string | null,
-    date: number | null,
-    id: string | null
-  }
 }
 
 const initialState: UserState = {
   isAuth: false,
   user: {
     id: null,
-    login: null,
+    phone: null,
+    fullName: null,
     email: null,
-    name: null
+    avatar: null
   },
+  users: null,
   albums: null,
   photos: null,
-  album: {
-    name: null,
-    location: null,
-    date: null,
-    id: null,
-  }
 };
 
 
@@ -42,20 +35,21 @@ export class User extends ImmerReducer<UserState> {
     this.draftState.isAuth = isAuth;
   }
 
-  setUser(user: { email: null, fullname: null, id: null, login: null }) {
-    this.draftState.user.id = user.id;
-    this.draftState.user.name = user.fullname;
-    this.draftState.user.login = user.login;
-    this.draftState.user.email = user.email;
-  }
-
   setAlbums(albums: any) {
     this.draftState.albums = albums;
   }
 
-  getPhotos(photos: any) {
-    this.draftState.photos = photos;
+  setUsers(users: any) {
+    this.draftState.users = users;
   }
+
+  // setUser(user: {id: null, phone: null, fullName: null, email: null, avatar: null}) {
+  //   this.draftState.user.id = user.id;
+  //   this.draftState.user.phone = user.phone;
+  //   this.draftState.user.fullName = user.fullName;
+  //   this.draftState.user.email = user.email;
+  //   this.draftState.user.avatar = user.avatar;
+  // }
 
   // setAlbum(album: { title: null, location: null, date: null, id: null }) {
   //   this.draftState.album.name = album.title;
@@ -63,8 +57,6 @@ export class User extends ImmerReducer<UserState> {
   //   this.draftState.album.date = album.date;
   //   this.draftState.album.id = album.id;
   // }
-
-
 }
 
 export default createReducerFunction(User, initialState);

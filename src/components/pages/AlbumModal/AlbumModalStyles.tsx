@@ -46,6 +46,10 @@ export const CloseButton = styled.div`
 
 export const Wrapper = styled.div`
   overflow: hidden;
+  
+  @media (min-width: 1020px) {
+    width: 600px;
+  }
 `;
 
 export const Form = styled.div`
@@ -76,6 +80,10 @@ export const Input = styled.input`
 
   &:first-child {
     margin: 0 auto;
+  }
+
+  @media (min-width: 1020px) {
+    width: 500px;
   }
 `;
 

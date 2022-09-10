@@ -23,17 +23,21 @@ const Albums = () => {
     const nav = useNavigate();
     const albums = useSelector((state: any) => state.userReducer.albums);
     const dispatch = useDispatch<AppDispatch>();
+
     const [isOpen, setIsOpen] = useToggle(false);
+
     useEffect(() => {
         dispatch(getAlbums());
     }, [])
+
     const handleLogoClick = () => {
         nav('/');
     }
+
     const handleAddClick = () => {
         setIsOpen(true);
     }
-    console.log()
+
     return (
         <main className='albums'>
             <ModalWrapper isOpen={isOpen}>
@@ -47,7 +51,6 @@ const Albums = () => {
                     <AlbumWrapper key={album.id}
                                   onClick={() => {
                                       nav(`/album=${album.id}`)
-                                      console.log(album.id)
                                   }}>
                         <Icon>
                             <AlbumsIcon/>

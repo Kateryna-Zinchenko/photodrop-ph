@@ -1,4 +1,4 @@
-import user, {User} from "../reducers/user";
+import {User} from "../reducers/user";
 import {createActionCreators} from "immer-reducer";
 import {AsyncAction} from "./common";
 import TokensLocalStorage from "../../utils/local-storage/TokensLocalStorage";
@@ -7,7 +7,7 @@ export const userActions = createActionCreators(User);
 
 export type UserActions = ReturnType<typeof userActions.setAuth
     | typeof userActions.setAlbums
-    | typeof userActions.getPhotos
+    | typeof userActions.setUsers
     >
 
 export const setAuthData =
@@ -25,7 +25,7 @@ export const setAuthData =
                     storage.setAccessToken(token);
                     dispatch(userActions.setAuth(true));
                 } else {
-                    console.log('Error')
+                    console.log('error')
                 }
             } catch (e: any) {
                 dispatch(e)            }
@@ -49,8 +49,8 @@ export const getAlbums =
                 const response = await mainProtectedApi.getAlbums();
                 dispatch(userActions.setAlbums(response));
             } catch (e: any) {
-                TokensLocalStorage.getInstance().clear()
-                window.location.replace('/login')
+                TokensLocalStorage.getInstance().clear();
+                window.location.replace('/login');
             }
         };
 
@@ -59,21 +59,20 @@ export const addAlbum =
         async (dispatch, _, {mainProtectedApi}) => {
             try {
                 const data = {title: title, location: location, date: date};
-                const response = await mainProtectedApi.addAlbum(data);
-                console.log(data)
+                await mainProtectedApi.addAlbum(data);
             } catch (e: any) {
                 dispatch(e)
             }
         };
 
-// export const getPhotos =
-//     (albumId: string): AsyncAction =>
-//         async (dispatch, _, {mainProtectedApi}) => {
-//             try {
-//                 const response = await mainProtectedApi.getPhotos(albumId);
-//                 dispatch(userActions.getPhotos(response))
-//                 console.log(response)
-//             } catch (e: any) {
-//                 dispatch(e)
-//             }
-//         };
+export const getUsers =
+    (): AsyncAction =>
+        async (dispatch, _, {mainProtectedApi}) => {
+            try {
+                const response = await mainProtectedApi.getUsers();
+                dispatch(userActions.setUsers(response))
+                console.log(response)
+            } catch (e: any) {
+                dispatch(e)
+            }
+        };
