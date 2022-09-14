@@ -5,10 +5,11 @@ import TokensLocalStorage from "../../utils/local-storage/TokensLocalStorage";
 
 export const userActions = createActionCreators(User);
 
-export type UserActions = ReturnType<typeof userActions.setAuth
+export type UserActions = ReturnType<
+    typeof userActions.setAuth
     | typeof userActions.setAlbums
     | typeof userActions.setUsers
-    >
+    | typeof userActions.setUser>
 
 export const setAuthData =
     (login: string, password: string): AsyncAction =>
@@ -28,7 +29,8 @@ export const setAuthData =
                     console.log('error')
                 }
             } catch (e: any) {
-                dispatch(e)            }
+                dispatch(e)
+            }
         };
 
 export const setAuth =
@@ -70,9 +72,31 @@ export const getUsers =
         async (dispatch, _, {mainProtectedApi}) => {
             try {
                 const response = await mainProtectedApi.getUsers();
-                dispatch(userActions.setUsers(response))
-                console.log(response)
+                dispatch(userActions.setUsers(response));
             } catch (e: any) {
                 dispatch(e)
             }
         };
+
+export const setUser =
+    (id: string, phone: string, fullName: string, email: string, avatar: any): AsyncAction =>
+        async (dispatch, _, {mainProtectedApi}) => {
+            try {
+                const data = {id: id, phone: phone, fullName: fullName, email: email, avatar: avatar};
+                dispatch(userActions.setUser(data));
+            } catch (e: any) {
+                dispatch(e)
+            }
+        };
+
+export const uploadPhoto =
+    (albumId: string, contentType: string): AsyncAction =>
+        async (dispatch, _, {mainProtectedApi}) => {
+            try {
+                const data = {albumId: albumId, contentType: contentType};
+                const url: any = await mainProtectedApi.getUrl(data);
+
+            } catch (e: any){
+                dispatch(e)
+            }
+}

@@ -59,26 +59,91 @@ export const SearchWrapper = styled.div<{ isOpenSearch:boolean }>`
   height: 300px;
   background: #fff;
   border-radius: 8px;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   overflow-y: scroll;
   position: absolute;
   bottom: 0;
   left: 0;
+  
+  ul {
+    width: 100%;
+    margin: 81px 0 0;
+    padding: 12px 15px 0 15px;
+  }
 `;
 
-export const CLoseButton2 = styled.button`
-  width: 16px;
-  height: 16px;
-  border: 1px solid #000;
-  //position: absolute;
+export const CLoseWrapper2 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
   top: 6px;
   right: 6px;
+  z-index: 3;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+`;
+
+export const CLoseWrapper4 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 8px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+`;
+
+export const CloseButton2 = styled.div`
+  position: relative;
+  border-radius: 100px;
+  transform: rotate(45deg);
+
+  &:before {
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    background: #5C5C5C;
+    margin: 0;
+    border-radius: 100px;
+  }
+
+  &:after {
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    background: #5C5C5C;
+    margin: 0;
+    border-radius: 100px;
+  }
+`;
+
+export const CloseButton4 = styled(CloseButton2)`
+  &:before {
+    width: 2px;
+    height: 12px;
+  }
+  &:after {
+    width: 12px;
+    height: 2px;
+  }
 `;
 
 export const Header = styled.div`
   width: 300px;
-  padding: 20px 15px 18px 15px;
+  padding: 26px 15px 18px 15px;
   border-bottom: 1px solid #F1F0EC;
   position: fixed;
   background: #fff;
@@ -113,32 +178,88 @@ export const List = styled.ul`
   padding: 12px 15px 0 15px;
 `;
 
-export const Li = styled.li`
+
+
+export const Li = styled.li<{assigned: boolean}>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: 'Futura PT Light',serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 21px;
-  display: flex;
-  align-items: center;
-  color: #262626;
-  padding: 8px 0;
+  color: ${({assigned}) => assigned ? '#fff' : '#262626'};
+  background: ${({assigned}) => assigned ? 'rgba(51,0,204,0.58)' : 'none'};
+  border-radius: 8px;
+  padding: 8px 12px;
   cursor: default;
-  
-  &:first-child {
-    padding: 0 0 8px 0;
+`;
+
+export const Item = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Futura PT Light',serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  color: #262626;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: default;
+  position: relative;
+  width: fit-content;
+`;
+
+export const AddedWrapper = styled.div<{isOpenAdded: boolean}>`
+  display: ${({isOpenAdded}) => isOpenAdded ? 'block' : 'none'};
+  width: 300px;
+  height: 300px;
+  background: #fff;
+  border-radius: 8px;
+  z-index: 2;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  ul {
+    margin: 24px 0 0;
+  }
+  ul div{
+    margin: 0 auto;
+    width: fit-content;
+    font-family: 'Futura PT Light',serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
   }
 `;
 
-export const Hover = styled.div`
+export const AddedText = styled.div<{assigned: boolean}>`
+  display: ${({assigned}) => assigned ? 'block' : 'none'};
+`;
+
+export const SelectedWrapper = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: red;
-  z-index: 124;
-  &:hover {
-    
-  }
+  bottom: 70px;
+  right: 250px;
+`;
+
+export const Count = styled.div`
+  position: absolute;
+  top: 6px;
+  right: -42px;
+  z-index: 1;
+  font-family: 'Futura PT Medium', serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: left;
 `;
 
 export const LogoWrapper = styled.div`

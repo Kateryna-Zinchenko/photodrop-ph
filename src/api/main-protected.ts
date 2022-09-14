@@ -24,4 +24,11 @@ export default class MainProtected extends HttpClientProtected {
 
     public getUsers = () =>
         this.instance.get<any>(`/users`);
+
+    public getUrl = (data: {albumId: string, contentType: string}) => (
+        this.instance.post<any>(`/photos/s3url`, data)
+    );
+    public uploadPhoto = (data: {albumId: string, photos: [{key: string, users: []}]}) => (
+        this.instance.post<any>(`/photos`, data)
+    );
 }

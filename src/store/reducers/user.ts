@@ -1,5 +1,4 @@
 import { createReducerFunction, ImmerReducer } from "immer-reducer";
-import {getUsers} from "../actions/user";
 
 interface UserState {
   isAuth: boolean;
@@ -40,16 +39,20 @@ export class User extends ImmerReducer<UserState> {
   }
 
   setUsers(users: any) {
-    this.draftState.users = users;
+    this.draftState.users = users.map((user: any) => ({...user, assigned: false }));
   }
 
-  // setUser(user: {id: null, phone: null, fullName: null, email: null, avatar: null}) {
-  //   this.draftState.user.id = user.id;
-  //   this.draftState.user.phone = user.phone;
-  //   this.draftState.user.fullName = user.fullName;
-  //   this.draftState.user.email = user.email;
-  //   this.draftState.user.avatar = user.avatar;
-  // }
+  setUser(user: {id: string, phone: string, fullName: string, email: string, avatar: any}) {
+    this.draftState.user.id = user.id;
+    this.draftState.user.phone = user.phone;
+    this.draftState.user.fullName = user.fullName;
+    this.draftState.user.email = user.email;
+    this.draftState.user.avatar = user.avatar;
+  }
+
+  setLoadedPhotos(photos: any) {
+    this.draftState.photos = photos;
+  }
 
   // setAlbum(album: { title: null, location: null, date: null, id: null }) {
   //   this.draftState.album.name = album.title;

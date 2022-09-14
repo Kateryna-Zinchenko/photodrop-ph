@@ -28,7 +28,7 @@ const Albums = () => {
 
     useEffect(() => {
         dispatch(getAlbums());
-    }, [])
+    }, [dispatch])
 
     const handleLogoClick = () => {
         nav('/');
