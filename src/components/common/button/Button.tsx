@@ -64,4 +64,8 @@ const Wrapper = styled.button<Props>`
   left: ${({left}) => left ? left : 'unset'};
   transform: ${({transform}) => transform ? transform : 'unset'};
   z-index: ${({z_index}) => z_index ? z_index : 'unset'};
+  
+  @media (max-width: 425px) {
+    width: 175px;
+  }
 `;
