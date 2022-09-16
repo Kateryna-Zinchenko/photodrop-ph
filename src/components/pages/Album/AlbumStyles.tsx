@@ -327,7 +327,6 @@ export const Images = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   height: 100%;
-  //overflow: hidden;
 `;
 
 export const ImgWrapper = styled.div`
