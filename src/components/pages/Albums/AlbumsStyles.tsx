@@ -39,7 +39,8 @@ export const AddButton = styled.button`
   height: 44px;
   border: none;
   border-radius: 50px;
-  background: #3300CC;
+  //background: #3300CC;
+  background: #fff;
   color: #FFF;
   display: flex;
   justify-content: center;
