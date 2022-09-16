@@ -9,6 +9,13 @@ export const OpenedImageWrapper = styled.div<{ isOpen: boolean }>`
   height: 100%;
   background: rgba(124, 124, 124, 0.3);
   z-index: 3;
+  
+  @media(min-width: 375px) {
+    max-width: 375px;
+  }
+  @media(min-width: 425px) {
+    max-width: 425px;
+  }
 `;
 
 export const Wrapper = styled.div`
