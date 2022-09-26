@@ -1,16 +1,11 @@
 import {Uppy} from '@uppy/core'
-import {Dashboard, AwsS3} from 'uppy'
+import {AwsS3} from 'uppy'
 
-const uppy = new Uppy({
-  debug: true,
+export const uppy = new Uppy({
+  debug: true
 })
 
-uppy.use(Dashboard, {
-  inline: true,
-  target: '#drag-drop-area',
-})
-
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI3MjFlNTVmOS0xY2VjLTQ3MTUtYjM0Ni02YTk4MzQ1MjBhY2EiLCJpYXQiOjE2NjMxNzIyNTksImV4cCI6MTY2MzI1ODY1OX0.p6nNVIbEpfsBqxjgejFlH-bDPA56jA7tJC3v8ahi20E'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI3MjFlNTVmOS0xY2VjLTQ3MTUtYjM0Ni02YTk4MzQ1MjBhY2EiLCJpYXQiOjE2NjQxODQ3NjQsImV4cCI6MTY2NDI3MTE2NH0.Q-Z3vg224jollrO_Qkid2XIVQWuye_1St1w10zcRRlc'
 
 uppy.use(AwsS3, {
   getUploadParameters (file: any) {
@@ -42,11 +37,13 @@ uppy.use(AwsS3, {
 })
 
 // After single file
-uppy.on('upload-success', (file: any, data: any) => {
-  console.log(file.meta['key']);
+uppy.on('upload-success', (file: any) => {
+  //console.log(file.meta['key']);
+  console.log(file);
 })
 
 // After all files
-uppy.on('complete', (result: any) => {
-  console.log(result.successful.map((item: any) => item.meta['key']))
-})
+// uppy.on('complete', (result: any) => {
+//   //console.log(result.successful.map((item: any) => item.meta['key']))
+//   console.log(result)
+// })

@@ -9,6 +9,7 @@ export const OpenedImageWrapper = styled.div<{ isOpen: boolean }>`
   height: 100%;
   background: rgba(124, 124, 124, 0.3);
   z-index: 3;
+  }
 `;
 
 export const Wrapper = styled.div`

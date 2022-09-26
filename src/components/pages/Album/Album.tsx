@@ -11,7 +11,6 @@ import {
     Images,
     Img,
     ImgWrapper,
-    Input,
     Label,
     Li,
     Logo,
@@ -38,6 +37,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUsers} from "../../../store/actions/user";
 import AddPeople from "./AddPeople";
 import SelectedPeople from "./SelectedPeople";
+import { DragDrop } from '@uppy/react';
+import {uppy} from "../../../main";
 
 const Album = () => {
     const [selectedImages, setSelectedImages] = useState<any>([]);
@@ -175,8 +176,12 @@ const Album = () => {
             </LogoWrapper>
             <Label>
                 Add photos
-                <Input type='file' onChange={onSelectFile} multiple/>
+                <DragDrop
+                    uppy={uppy}
+                />
+                {/*<Input type='file' onChange={onSelectFile} multiple/>*/}
             </Label>
+
             <Images>
                 {selectedImages && selectedImages.map((image: any) => {
                     return (

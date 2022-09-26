@@ -21,3 +21,28 @@
     font-weight: normal;
     font-style: normal;
 }
+
+.uppy-u-reset,
+.uppy-DragDrop-container,
+.uppy-DragDrop--isDragDropSupported {
+    width: 345px !important;
+    height: 50px !important;
+    opacity: 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translate(-50%,0%) !important;
+    border-radius: 50px !important;
+}
+
+.uppy-DragDrop-inner {
+    padding: 0 !important;
+}
+
+.uppy-DragDrop-label {
+    display: none !important;
+}
+
+.uppy-DragDrop-arrow {
+    display: none !important;
+}
