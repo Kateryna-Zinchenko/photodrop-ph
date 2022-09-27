@@ -36,6 +36,7 @@ const Login = () => {
         }
     )
 
+
     return (
         <main className='login'>
             <Wrapper>
@@ -54,6 +55,7 @@ const Login = () => {
                         onChange={onPasswordChange}
                         value={password}
                         type="password"
+                        autoComplete='on'
                     />
                     <Button onClick={onSignInClick}>Sign in</Button>
                 </Form>

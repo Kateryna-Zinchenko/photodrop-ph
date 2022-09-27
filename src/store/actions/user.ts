@@ -16,7 +16,7 @@ export const setAuthData =
         async (dispatch, _, {mainApi}) => {
             try {
                 const data = {login: login, password: password};
-                const response = await mainApi.login(data);
+                const response = await mainApi.login(data)
 
                 // @ts-ignore
                 const token = response.token;
@@ -29,7 +29,7 @@ export const setAuthData =
                     console.log('error')
                 }
             } catch (e: any) {
-                dispatch(e)
+                console.log(e)
             }
         };
 
@@ -40,7 +40,7 @@ export const setAuth =
                 dispatch(userActions.setAuth(auth));
 
             } catch (e: any) {
-                dispatch(e)
+                console.log(e)
             }
         };
 

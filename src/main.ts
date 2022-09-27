@@ -1,15 +1,17 @@
 import {Uppy} from '@uppy/core'
 import {AwsS3} from 'uppy'
+import TokensLocalStorage from "./utils/local-storage/TokensLocalStorage";
+import store from "./store";
 
 export const uppy = new Uppy({
   debug: true
 })
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI3MjFlNTVmOS0xY2VjLTQ3MTUtYjM0Ni02YTk4MzQ1MjBhY2EiLCJpYXQiOjE2NjQxODQ3NjQsImV4cCI6MTY2NDI3MTE2NH0.Q-Z3vg224jollrO_Qkid2XIVQWuye_1St1w10zcRRlc'
+const token = TokensLocalStorage.getInstance().getAccessToken();
 
 uppy.use(AwsS3, {
   getUploadParameters (file: any) {
-    return fetch('https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/s3url', {
+    return fetch('///', {
       method: 'post',
       headers: {
         accept: 'application/json',
@@ -38,7 +40,7 @@ uppy.use(AwsS3, {
 
 // After single file
 uppy.on('upload-success', (file: any) => {
-  //console.log(file.meta['key']);
+  console.log(file.meta['key']);
   console.log(file);
 })
 
@@ -47,3 +49,5 @@ uppy.on('upload-success', (file: any) => {
 //   //console.log(result.successful.map((item: any) => item.meta['key']))
 //   console.log(result)
 // })
+
+//https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/s3url

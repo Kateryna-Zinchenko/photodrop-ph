@@ -22,27 +22,61 @@
     font-style: normal;
 }
 
-.uppy-u-reset,
-.uppy-DragDrop-container,
-.uppy-DragDrop--isDragDropSupported {
-    width: 345px !important;
-    height: 50px !important;
-    opacity: 0 !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 50% !important;
-    transform: translate(-50%,0%) !important;
-    border-radius: 50px !important;
+/*.uppy-u-reset,*/
+/*.uppy-DragDrop-container,*/
+/*.uppy-DragDrop--isDragDropSupported {*/
+/*    width: 345px !important;*/
+/*    height: 50px !important;*/
+/*    opacity: 0 !important;*/
+/*    position: fixed !important;*/
+/*    bottom: 0 !important;*/
+/*    left: 50% !important;*/
+/*    transform: translate(-50%,0%) !important;*/
+/*    border-radius: 50px !important;*/
+/*}*/
+
+/*.uppy-DragDrop-inner {*/
+/*    padding: 0 !important;*/
+/*}*/
+
+/*.uppy-DragDrop-label {*/
+/*    display: none !important;*/
+/*}*/
+
+/*.uppy-DragDrop-arrow {*/
+/*    display: none !important;*/
+/*}*/
+
+
+.uppy-Dashboard-inner {
+    width: 100% !important;
+    height: 93vh !important;
 }
 
-.uppy-DragDrop-inner {
-    padding: 0 !important;
+.uppy-Dashboard-AddFiles {
+    border: none !important;
 }
 
-.uppy-DragDrop-label {
-    display: none !important;
-}
-
-.uppy-DragDrop-arrow {
-    display: none !important;
+.uppy-StatusBar-actionBtn--upload {
+    display: block;
+    width: 345px;
+    height: 50px;
+    background: #3300CC !important;
+    border: none !important;
+    border-radius: 50px;
+    margin: 0;
+    padding: 14px 0;
+    font-family: 'Futura PT Medium', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 2;
 }
