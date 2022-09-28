@@ -2,6 +2,7 @@ import {Uppy} from '@uppy/core'
 import {AwsS3} from 'uppy'
 import TokensLocalStorage from "./utils/local-storage/TokensLocalStorage";
 import store from "./store";
+import axios from 'axios';
 
 export const uppy = new Uppy({
   debug: true
@@ -11,7 +12,7 @@ const token = TokensLocalStorage.getInstance().getAccessToken();
 
 uppy.use(AwsS3, {
   getUploadParameters (file: any) {
-    return fetch('///', {
+    return fetch('https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/s3url', {
       method: 'post',
       headers: {
         accept: 'application/json',
@@ -19,7 +20,7 @@ uppy.use(AwsS3, {
         'Authorization': 'Bearer ' + token,
       },
       body: JSON.stringify({
-        albumId: '1ea6ab9e-f89e-406d-b51e-489881f8521e',
+        albumId: 'edf0e470-4956-413b-8bd1-53650f8580d4',
         contentType: file.type,
       }),
     }).then((response) => {
@@ -41,13 +42,26 @@ uppy.use(AwsS3, {
 // After single file
 uppy.on('upload-success', (file: any) => {
   console.log(file.meta['key']);
-  console.log(file);
 })
 
 // After all files
-// uppy.on('complete', (result: any) => {
-//   //console.log(result.successful.map((item: any) => item.meta['key']))
-//   console.log(result)
-// })
+uppy.on('complete', async (result: any) => {
+      console.log(result.successful.map((item: any) => item.meta['key']));
+      const response = await axios({
+        method: 'post',
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+        url: 'https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/',
+        data: {
+          albumId: 'edf0e470-4956-413b-8bd1-53650f8580d4',
+          keys: result.successful.map((item: any) => item.meta['key'])
+        }
+      });
+      console.log(response);
+    }
+)
 
 //https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/s3url

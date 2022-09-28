@@ -23,8 +23,11 @@ export const Wrapper = styled.div`
   opacity: 1;
   background: #fff;
   border-radius: 50%;
+  border: 1px solid #000;
   z-index: 1;
-  position: absolute;
-  //right: 200px;
-  //bottom: 20px;
+  //position: absolute;
+  //right: 30%;
+  //bottom: 50%;
+  //transform: translate(0, -50%);
+  //cursor: pointer;
 `;

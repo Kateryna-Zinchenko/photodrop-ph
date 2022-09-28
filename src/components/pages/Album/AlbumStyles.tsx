@@ -57,20 +57,22 @@ export const OpenedImage = styled.img`
 export const SearchWrapper = styled.div<{ isOpenSearch:boolean }>`
   display: ${({isOpenSearch}) => isOpenSearch ? 'block' : 'none'};
   width: 300px;
-  height: 300px;
+  height: 280px;
   background: #fff;
   border-radius: 8px;
   z-index: 2;
   overflow: hidden;
   overflow-y: scroll;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  
+  top: 0;
+  right: -320px;
+  border: 1px solid #F1F0EC;
+
+
   ul {
     width: 100%;
-    margin: 81px 0 0;
-    padding: 12px 15px 0 15px;
+    margin: 0;
+    padding: 12px 30px 0 15px;
   }
 `;
 
@@ -87,15 +89,15 @@ export const CLoseWrapper2 = styled.div`
   cursor: pointer;
 `;
 
-export const CLoseWrapper4 = styled.div`
-  display: flex;
+export const CLoseWrapper4 = styled.div<{ selectedUsers: [] }>`
+  display: ${({selectedUsers}) => selectedUsers.length !== 0 ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 8px;
-  right: 0;
-  width: 20px;
-  height: 20px;
+  right: -26px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 `;
 
@@ -146,7 +148,6 @@ export const Header = styled.div`
   width: 300px;
   padding: 26px 15px 18px 15px;
   border-bottom: 1px solid #F1F0EC;
-  position: fixed;
   background: #fff;
   border-radius: 8px 8px 0 0;
 `;
@@ -195,6 +196,7 @@ export const Li = styled.li<{assigned: boolean}>`
   border-radius: 8px;
   padding: 8px 12px;
   cursor: default;
+  position: relative;
 `;
 
 export const Item = styled.li`
@@ -224,8 +226,10 @@ export const AddedWrapper = styled.div<{isOpenAdded: boolean}>`
   overflow: hidden;
   overflow-y: scroll;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  right: -320px;
+  border: 1px solid #F1F0EC;
+
   ul {
     margin: 24px 0 0;
   }
@@ -246,8 +250,10 @@ export const AddedText = styled.div<{assigned: boolean}>`
 
 export const SelectedWrapper = styled.div`
   position: absolute;
-  bottom: 70px;
-  right: 250px;
+  right: -30%;
+  bottom: 50%;
+  transform: translate(0, 50%);
+  cursor: pointer;
 `;
 
 export const Count = styled.div`
@@ -287,9 +293,32 @@ export const Logo = styled.img`
   margin: 0 auto;
 `;
 
+export const PhotosWrapper = styled.div`
+  margin: 20px auto 0;
+`;
+
+export const PhotoWrapper = styled.div`
+  position: relative;
+  width: fit-content;
+  padding: 0 40px;
+`;
+
+export const Photo = styled.img`
+  height: 20vw;
+  object-fit: cover;
+  max-width: 600px;
+  flex: 0 1 55%;
+  background: #d3d3d3;
+  width: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 20px 0 0;
+
+`;
+
 export const Label = styled.label`
   display: block;
-  width: 345px;
+  width: 50px;
   height: 50px;
   background: #3300CC;
   border: none;

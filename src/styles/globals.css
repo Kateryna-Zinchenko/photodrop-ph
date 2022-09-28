@@ -47,10 +47,33 @@
 /*    display: none !important;*/
 /*}*/
 
+@media (min-width: 1024px) {
+    .uppy-Dashboard-inner {
+        width: 100% !important;
+        height: 92vh !important;
+    }
+}
 
 .uppy-Dashboard-inner {
     width: 100% !important;
     height: 93vh !important;
+
+}
+
+.uppy-DashboardTab-btn {
+    margin-bottom: 80px;
+}
+
+.uppy-Dashboard-AddFiles {
+    height: fit-content;
+}
+
+.uppy-DashboardTab {
+    border-bottom: none;
+}
+
+.uppy-DashboardTab-btn {
+    padding: 0;
 }
 
 .uppy-Dashboard-AddFiles {
@@ -79,4 +102,8 @@
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 2;
+}
+
+.uppy-DashboardTab-btn {
+    width: unset;
 }

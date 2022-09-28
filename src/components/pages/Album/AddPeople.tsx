@@ -25,7 +25,8 @@ export const Wrapper = styled.div`
   border-radius: 50%;
   z-index: 1;
   position: absolute;
-  left: 200px;
-  bottom: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
 `;

@@ -50,7 +50,7 @@ export class User extends ImmerReducer<UserState> {
     this.draftState.user.avatar = user.avatar;
   }
 
-  setLoadedPhotos(photos: any) {
+  setUploadedPhotos(photos: any) {
     this.draftState.photos = photos;
   }
 
