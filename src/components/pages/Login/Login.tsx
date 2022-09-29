@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {AppDispatch} from "../../../App";
 import {setAuthData} from '../../../store/actions/user';
+import {PropagateLoader} from 'react-spinners';
 
 const Login = () => {
     const [login, setLogin] = useState<string>("");
@@ -12,6 +13,7 @@ const Login = () => {
     const dispatch = useDispatch<AppDispatch>();
     const nav = useNavigate();
     const isAuth = useSelector((state: any) => state.userReducer.isAuth);
+    const isLoading = useSelector((state: any) => state.userReducer.isLoading);
 
     const onLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
         setLogin(e.currentTarget.value);
@@ -22,7 +24,7 @@ const Login = () => {
     };
 
     const onSignInClick = async () => {
-        await dispatch(setAuthData(login, password))
+        await dispatch(setAuthData(login, password));
     };
 
     const handleClick = () => {
@@ -43,22 +45,29 @@ const Login = () => {
                 <LogoWrapper>
                     <Logo src='/assets/images/logo.png' onClick={handleClick}/>
                 </LogoWrapper>
-                <Form>
-                    <Input
-                        placeholder='login'
-                        onChange={onLoginChange}
-                        value={login}
-                        type="text"
-                    />
-                    <Input
-                        placeholder='password'
-                        onChange={onPasswordChange}
-                        value={password}
-                        type="password"
-                        autoComplete='on'
-                    />
-                    <Button onClick={onSignInClick}>Sign in</Button>
-                </Form>
+                {
+                    isLoading ?
+                        <PropagateLoader color='#3300CC' loading={isLoading}/>
+                        :
+                        <Form>
+                            <Input
+                                placeholder='login'
+                                onChange={onLoginChange}
+                                value={login}
+                                type="text"
+                                autoComplete='email'
+                            />
+                            <Input
+                                placeholder='password'
+                                onChange={onPasswordChange}
+                                value={password}
+                                type="password"
+                                autoComplete='current-password'
+                            />
+                            <Button onClick={onSignInClick}>Sign in</Button>
+                        </Form>
+                }
+
             </Wrapper>
         </main>
     );

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {useToggle} from 'react-use';
 import {
-    AddedText, AddedWrapper,
-    ArrowBack, CloseButton2, CloseButton4, CLoseWrapper2, CLoseWrapper4, Count, Header, Item, Label, Li,
+    AddedWrapper,
+    ArrowBack, Button, CloseButton2, CloseButton4, CLoseWrapper2, CLoseWrapper4, Count, Header, Item, Li,
     Logo,
     LogoWrapper, Photo, PhotosWrapper, PhotoWrapper, SearchInput, SearchWrapper, SelectedWrapper
 } from './AlbumStyles';
@@ -27,15 +27,19 @@ const Album = () => {
     const nav = useNavigate();
     const users = useSelector((state: any) => state.userReducer.users);
     const albums = useSelector((state: any) => state.userReducer.albums);
+    const params = useParams()
+    console.log(params)
     const photos = useSelector((state: any) => state.userReducer.photos);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         dispatch(getAlbums());
-        dispatch(getUsers());
-        const album = albums && albums.map((album: any) => album);
+        dispatch(getUploadedPhotos(params.id as string));
 
-        dispatch(getUploadedPhotos())
+        // if (albums) {
+        //     const album = albums && albums.map((album: any) => album.id);
+        //     console.log()
+        // }
     }, [])
 
     const handleLogoClick = () => {
@@ -78,7 +82,10 @@ const Album = () => {
         setSelectedUsers([...selectedUsers, user]);
     }
 
-    console.log(users)
+    // const onSaveClick = () => {
+    //     dispatch(addSelectedUsers())
+    // }
+
 
     return (
         <main className='album'>
@@ -171,16 +178,11 @@ const Album = () => {
                         return (
                             <div>
                                 <PhotoWrapper>
-                                    <Photo key={photo.id} src={photo.url} onClick={() => setIsOpenSearch(true)}/>
+                                    <Photo key={photo.id} src={photo.url}/>
                                     <div onClick={() => setIsOpenSearch(true)}>
                                         <AddPeople/>
                                     </div>
-                                    {/*<SelectedWrapper onClick={() => setIsOpenAdded(true)}>*/}
-                                    {/*    <SelectedPeople/>*/}
-                                    {/*    <Count>*/}
-                                    {/*        {selectedUsers.length}*/}
-                                    {/*    </Count>*/}
-                                    {/*</SelectedWrapper>*/}
+
                                     <SearchWrapper isOpenSearch={isOpenSearch}>
                                         <CLoseWrapper2 onClick={() => {
                                             setIsOpenSearch(false)
@@ -192,44 +194,56 @@ const Album = () => {
                                         </Header>
                                         <ul>
                                             {filteredData && filteredData.map((user: any) =>
-                                                <Li key={user.id}
-                                                    assigned={selectedUsers.includes(user)}
-                                                    onClick={() => selectedUsers.includes(user) ? alert('User already exists') :
-                                                        onAddUserClick(user)}>
-                                                    {user.phone}
-                                                    {/*<AddedText assigned={selectedUsers.includes(user)}>*/}
-                                                    {/*    added*/}
-                                                    {/*</AddedText>*/}
+                                                <div>
+                                                    <Li key={user.id}
+                                                        assigned={selectedUsers.includes(user)}
+                                                        onClick={() => selectedUsers.includes(user) ? alert('User already exists') :
+                                                            onAddUserClick(user)}>
+                                                        {user.phone}
+                                                        {/*<AddedText assigned={selectedUsers.includes(user)}>*/}
+                                                        {/*    added*/}
+                                                        {/*</AddedText>*/}
+                                                    </Li>
                                                     <CLoseWrapper4 selectedUsers={selectedUsers} onClick={() => {
                                                         setSelectedUsers(selectedUsers.filter((e: any) => e !== user))
                                                     }}>
                                                         <CloseButton4/>
                                                     </CLoseWrapper4>
-                                                </Li>
+                                                </div>
                                             )}
                                         </ul>
+                                        <SelectedWrapper onClick={() => setIsOpenAdded(true)}>
+                                            <SelectedPeople/>
+                                            <Count>
+                                                {selectedUsers.length}
+                                            </Count>
+                                        </SelectedWrapper>
+                                        <Button selectedUsers={selectedUsers}>Save</Button>
                                     </SearchWrapper>
-                                    {/*<AddedWrapper isOpenAdded={isOpenAdded}>*/}
-                                    {/*    <CLoseWrapper2 onClick={() => {*/}
-                                    {/*        setIsOpenAdded(false)*/}
-                                    {/*    }}>*/}
-                                    {/*        <CloseButton2/>*/}
-                                    {/*    </CLoseWrapper2>*/}
-                                    {/*    <ul>*/}
-                                    {/*        {selectedUsers.length > 0 ?*/}
-                                    {/*            selectedUsers.map((user: any) =>*/}
-                                    {/*                <Item key={user.id}>*/}
-                                    {/*                    {user.phone}*/}
-                                    {/*                    <CLoseWrapper4 onClick={() => {*/}
-                                    {/*                        setSelectedUsers(selectedUsers.filter((e: any) => e !== user))*/}
-                                    {/*                    }}>*/}
-                                    {/*                        <CloseButton4/>*/}
-                                    {/*                    </CLoseWrapper4>*/}
-                                    {/*                </Item>) :*/}
-                                    {/*            <div>Users not added</div>*/}
-                                    {/*        }*/}
-                                    {/*    </ul>*/}
-                                    {/*</AddedWrapper>*/}
+                                    <AddedWrapper selectedUsers={selectedUsers} isOpenAdded={isOpenAdded}>
+                                        <CLoseWrapper2 onClick={() => {
+                                            setIsOpenAdded(false)
+                                        }}>
+                                            <CloseButton2/>
+                                        </CLoseWrapper2>
+                                        <ul>
+                                            {selectedUsers.length > 0 ?
+                                                selectedUsers.map((user: any) =>
+                                                    <Item key={user.id}>
+                                                        {user.phone}
+                                                        <CLoseWrapper4 selectedUsers={selectedUsers} onClick={() => {
+                                                            setSelectedUsers(selectedUsers.filter((e: any) => e !== user))
+                                                        }}>
+                                                            <CloseButton4/>
+                                                        </CLoseWrapper4>
+                                                    </Item>) :
+                                                <div>Users have not been tagged yet</div>
+                                            }
+                                        </ul>
+                                        <Button selectedUsers={selectedUsers}>
+                                            Save
+                                        </Button>
+                                    </AddedWrapper>
                                 </PhotoWrapper>
 
                             </div>

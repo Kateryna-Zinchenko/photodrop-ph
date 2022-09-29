@@ -21,12 +21,16 @@ export const Wrapper = styled.div`
   width: 50px;
   height: 50px;
   opacity: 1;
-  background: #fff;
+  background: rgba(253, 253, 253, 0.65);
   border-radius: 50%;
   z-index: 1;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  right: 3px;
+  bottom: 3px;
   cursor: pointer;
+  
+  &:hover {
+    background: #fff;
+    transition: 0.2s;
+  }
 `;

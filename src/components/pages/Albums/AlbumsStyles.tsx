@@ -24,6 +24,15 @@ export const Logo = styled.img`
   margin: 0 auto;
 `;
 
+export const LoaderWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  margin: -110px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ButtonWrapper = styled.div`
   border-top: 1px solid #F1F0EC;
   padding: 20px 0 0;

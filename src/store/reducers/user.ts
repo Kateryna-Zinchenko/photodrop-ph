@@ -1,6 +1,7 @@
 import { createReducerFunction, ImmerReducer } from "immer-reducer";
 
 interface UserState {
+  isLoading: boolean;
   isAuth: boolean;
   user: {
     id: string | null;
@@ -15,6 +16,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
+  isLoading: false,
   isAuth: false,
   user: {
     id: null,
@@ -30,6 +32,10 @@ const initialState: UserState = {
 
 
 export class User extends ImmerReducer<UserState> {
+  setLoading(isLoading: boolean) {
+    this.draftState.isLoading = isLoading;
+  }
+
   setAuth(isAuth: boolean) {
     this.draftState.isAuth = isAuth;
   }

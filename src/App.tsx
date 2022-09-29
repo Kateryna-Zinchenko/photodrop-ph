@@ -18,7 +18,7 @@ function App() {
                     <Routes>
                         <Route path='/login' element={<Login/>}/>
                         <Route path='/' element={<ProtectedRoute><Albums/></ProtectedRoute>}/>
-                        <Route path='/album:id' element={<ProtectedRoute><Album/></ProtectedRoute>}/>
+                        <Route path='/album/:id' element={<ProtectedRoute><Album/></ProtectedRoute>}/>
                     </Routes>
                 </div>
             </BrowserRouter>

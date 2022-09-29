@@ -17,7 +17,7 @@ export const Logo = styled.img`
 `;
 
 export const Form = styled.div`
-  margin: 190px 0 0;
+  margin: 190px auto 0;
 `;
 
 export const Input = styled.input`

@@ -29,11 +29,15 @@ export default class MainProtected extends HttpClientProtected {
     //     this.instance.post<any>(`/photos/s3url`, data)
     // );
 
-    public getUploadPhotos = () => (
+    public getUploadPhotos = (albumId: string) => (
         this.instance.get<any>(`/photos/album`, {
             params: {
-                id: 'edf0e470-4956-413b-8bd1-53650f8580d4'
+                id: albumId
             }
         })
+    );
+
+    public addSelectedUsers = (data: {albumId: string, orders: [{photoId:string, userId:string}]}) => (
+        this.instance.post<any>(`/orders`, data)
     );
 }

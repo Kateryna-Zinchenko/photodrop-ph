@@ -10,13 +10,20 @@ export type UserActions = ReturnType<
     | typeof userActions.setAlbums
     | typeof userActions.setUsers
     | typeof userActions.setUser
-    | typeof userActions.setUploadedPhotos>
+    | typeof userActions.setUploadedPhotos
+    | typeof userActions.setLoading>
+
+export const setLoading = (loading: boolean) =>
+    (dispatch: any) => {
+        dispatch(userActions.setLoading(loading))
+    };
 
 export const setAuthData =
     (login: string, password: string): AsyncAction =>
         async (dispatch, _, {mainApi}) => {
             try {
                 const data = {login: login, password: password};
+                dispatch(setLoading(true));
                 const response = await mainApi.login(data)
 
                 // @ts-ignore
@@ -26,6 +33,7 @@ export const setAuthData =
                     const storage = TokensLocalStorage.getInstance();
                     storage.setAccessToken(token);
                     dispatch(userActions.setAuth(true));
+                    dispatch(setLoading(false));
                 } else {
                     console.log('error')
                 }
@@ -49,8 +57,13 @@ export const getAlbums =
     (): AsyncAction =>
         async (dispatch, _, {mainProtectedApi}) => {
             try {
+                dispatch(setLoading(true));
                 const response = await mainProtectedApi.getAlbums();
                 dispatch(userActions.setAlbums(response));
+                dispatch(setLoading(false));
+                dispatch(setAuth(true));
+
+
             } catch (e: any) {
                 TokensLocalStorage.getInstance().clear();
                 window.location.replace('/login');
@@ -70,10 +83,10 @@ export const addAlbum =
         };
 
 export const getUsers =
-    (): AsyncAction =>
+    (albumId: string): AsyncAction =>
         async (dispatch, _, {mainProtectedApi}) => {
             try {
-                const response = await mainProtectedApi.getUploadPhotos();
+                const response = await mainProtectedApi.getUploadPhotos(albumId);
                 // @ts-ignore
                 dispatch(userActions.setUsers(response.users));
             } catch (e: any) {
@@ -93,23 +106,25 @@ export const setUser =
         };
 
 export const getUploadedPhotos =
-    (): AsyncAction =>
+    (albumId: string): AsyncAction =>
         async (dispatch, _, {mainProtectedApi}) => {
             try {
-                const response = await mainProtectedApi.getUploadPhotos();
+                dispatch(setLoading(true));
+                const response = await mainProtectedApi.getUploadPhotos(albumId);
                 // @ts-ignore
                 dispatch(userActions.setUploadedPhotos(response.photos));
+                dispatch(setLoading(false))
             } catch (e: any) {
                 console.log(e)
             }
         };
 
-// export const uploadPhoto =
-//     (albumId: string, contentType: string): AsyncAction =>
+// export const addSelectedUsers =
+//     (albumId: string, orders: [{photoId: string, userId: string}]): AsyncAction =>
 //         async (dispatch, _, {mainProtectedApi}) => {
 //             try {
-//                 const data = {albumId: albumId, contentType: contentType};
-//                 const url: any = await mainProtectedApi.getUrl(data);
+//                 const data = {albumId: albumId, orders: [{photoId: photoId, userId: userId}]};
+//                 const response = await mainProtectedApi.addSelectedUsers(data);
 //
 //             } catch (e: any){
 //                 dispatch(e)

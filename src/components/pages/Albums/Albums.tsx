@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useToggle} from 'react-use';
 import {
     AddButton,
@@ -8,7 +8,7 @@ import {
     AlbumsWrapper,
     AlbumWrapper,
     ArrowRight,
-    Icon,
+    Icon, LoaderWrapper,
     Logo,
     LogoWrapper, ModalWrapper
 } from "./AlbumsStyles";
@@ -18,55 +18,67 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getAlbums} from "../../../store/actions/user";
 import {AppDispatch} from "../../../App";
 import AlbumModal from "../AlbumModal/AlbumModal";
+import {PropagateLoader} from 'react-spinners';
 
 const Albums = () => {
-    const nav = useNavigate();
-    const albums = useSelector((state: any) => state.userReducer.albums);
+        const nav = useNavigate();
+        const albums = useSelector((state: any) => state.userReducer.albums);
+        const isLoading = useSelector((state: any) => state.userReducer.isLoading);
+    const isAuth = useSelector((state: any) => state.userReducer.isAuth);
+    console.log(isAuth)
     const dispatch = useDispatch<AppDispatch>();
 
-    const [isOpen, setIsOpen] = useToggle(false);
+        const [isOpen, setIsOpen] = useToggle(false);
 
-    useEffect(() => {
-        dispatch(getAlbums());
-    }, [dispatch])
 
-    const handleLogoClick = () => {
-        nav('/');
+        const handleLogoClick = () => {
+            nav('/');
+        }
+
+        const handleAddClick = () => {
+            setIsOpen(true);
+        }
+
+        return (
+            <main className='albums'>
+                <ModalWrapper isOpen={isOpen}>
+                    <AlbumModal setIsOpen={setIsOpen}/>
+                </ModalWrapper>
+                <LogoWrapper>
+                    <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
+                </LogoWrapper>
+                {
+                    isLoading ?
+                        <LoaderWrapper>
+                            <PropagateLoader color='#3300CC' loading={isLoading}/>
+                        </LoaderWrapper>
+                        :
+                        <div>
+                            <AlbumsWrapper>
+                                {albums && albums.map((album: any) =>
+                                    <AlbumWrapper key={album.id}
+                                                  onClick={() => {
+                                                      nav(`/album/${album.id}`)
+                                                  }}>
+                                        <Icon>
+                                            <AlbumsIcon/>
+                                        </Icon>
+                                        <AlbumInfo>
+                                            <AlbumName>{album.title}</AlbumName>
+                                            <AlbumLocation>{album.location}</AlbumLocation>
+                                        </AlbumInfo>
+                                        <ArrowRight/>
+                                    </AlbumWrapper>
+                                )}
+                            </AlbumsWrapper>
+                            <AddButton onClick={handleAddClick}>+</AddButton>
+                        </div>
+                }
+
+            </main>
+        );
     }
-
-    const handleAddClick = () => {
-        setIsOpen(true);
-    }
-
-    return (
-        <main className='albums'>
-            <ModalWrapper isOpen={isOpen}>
-                <AlbumModal setIsOpen={setIsOpen}/>
-            </ModalWrapper>
-            <LogoWrapper>
-                <Logo src='/assets/images/logo.png' onClick={handleLogoClick}/>
-            </LogoWrapper>
-            <AlbumsWrapper>
-                {albums && albums.map((album: any) =>
-                    <AlbumWrapper key={album.id}
-                                  onClick={() => {
-                                      nav(`/album=${album.id}`)
-                                  }}>
-                        <Icon>
-                            <AlbumsIcon/>
-                        </Icon>
-                        <AlbumInfo>
-                            <AlbumName>{album.title}</AlbumName>
-                            <AlbumLocation>{album.location}</AlbumLocation>
-                        </AlbumInfo>
-                        <ArrowRight/>
-                    </AlbumWrapper>
-                )}
-            </AlbumsWrapper>
-            <AddButton onClick={handleAddClick}>+</AddButton>
-        </main>
-    );
-};
+;
 export default Albums;
 
 

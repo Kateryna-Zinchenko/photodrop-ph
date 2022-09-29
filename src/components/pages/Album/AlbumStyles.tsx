@@ -65,14 +65,19 @@ export const SearchWrapper = styled.div<{ isOpenSearch:boolean }>`
   overflow-y: scroll;
   position: absolute;
   top: 0;
-  right: -320px;
+  right: -340px;
   border: 1px solid #F1F0EC;
-
 
   ul {
     width: 100%;
     margin: 0;
-    padding: 12px 30px 0 15px;
+    padding: 12px 15px 0 15px;
+  }
+  
+  & ul > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
@@ -93,12 +98,10 @@ export const CLoseWrapper4 = styled.div<{ selectedUsers: [] }>`
   display: ${({selectedUsers}) => selectedUsers.length !== 0 ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 8px;
-  right: -26px;
   width: 16px;
   height: 16px;
   cursor: pointer;
+  margin: 0 0 0 12px;
 `;
 
 export const CloseButton2 = styled.div`
@@ -145,7 +148,7 @@ export const CloseButton4 = styled(CloseButton2)`
 `;
 
 export const Header = styled.div`
-  width: 300px;
+  width: 100%;
   padding: 26px 15px 18px 15px;
   border-bottom: 1px solid #F1F0EC;
   background: #fff;
@@ -197,6 +200,7 @@ export const Li = styled.li<{assigned: boolean}>`
   padding: 8px 12px;
   cursor: default;
   position: relative;
+  width: 300px;
 `;
 
 export const Item = styled.li`
@@ -213,13 +217,13 @@ export const Item = styled.li`
   padding: 8px 12px;
   cursor: default;
   position: relative;
-  width: fit-content;
+  //width: fit-content;
 `;
 
-export const AddedWrapper = styled.div<{isOpenAdded: boolean}>`
+export const AddedWrapper = styled.div<{isOpenAdded: boolean, selectedUsers: []}>`
   display: ${({isOpenAdded}) => isOpenAdded ? 'block' : 'none'};
   width: 300px;
-  height: 300px;
+  height: 280px;
   background: #fff;
   border-radius: 8px;
   z-index: 2;
@@ -227,20 +231,21 @@ export const AddedWrapper = styled.div<{isOpenAdded: boolean}>`
   overflow-y: scroll;
   position: absolute;
   top: 0;
-  right: -320px;
+  right: -340px;
   border: 1px solid #F1F0EC;
 
   ul {
     margin: 24px 0 0;
   }
   ul div{
-    margin: 0 auto;
-    width: fit-content;
+    margin: ${({selectedUsers}) => selectedUsers.length === 0 ? '0 auto' : '0 100px 0 0'};
+    //width: fit-content;
     font-family: 'Futura PT Light',serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 21px;
+    text-align: center;
   }
 `;
 
@@ -250,16 +255,16 @@ export const AddedText = styled.div<{assigned: boolean}>`
 
 export const SelectedWrapper = styled.div`
   position: absolute;
-  right: -30%;
-  bottom: 50%;
-  transform: translate(0, 50%);
+  right: 0;
+  bottom: 0;
+  //transform: translate(0, 50%);
   cursor: pointer;
 `;
 
 export const Count = styled.div`
   position: absolute;
-  top: 6px;
-  right: -42px;
+  top: 8px;
+  right: 10px;
   z-index: 1;
   font-family: 'Futura PT Medium', serif;
   font-style: normal;
@@ -267,6 +272,30 @@ export const Count = styled.div`
   font-size: 12px;
   line-height: 17px;
   text-align: left;
+`;
+
+export const Button = styled.button<{selectedUsers: []}>`
+  display: ${({selectedUsers}) => selectedUsers.length === 0 ? 'none' : 'flex'};
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 28px;
+  margin: 0 auto;
+  font-family: 'Futura PT Medium',serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #262626;
+  background: #F4F4F4;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translate(-50%, 0);
 `;
 
 export const LogoWrapper = styled.div`
@@ -295,12 +324,13 @@ export const Logo = styled.img`
 
 export const PhotosWrapper = styled.div`
   margin: 20px auto 0;
+  padding: 0 20px;
 `;
 
 export const PhotoWrapper = styled.div`
   position: relative;
   width: fit-content;
-  padding: 0 40px;
+  //padding: 0;
 `;
 
 export const Photo = styled.img`

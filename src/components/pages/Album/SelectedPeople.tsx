@@ -23,7 +23,6 @@ export const Wrapper = styled.div`
   opacity: 1;
   background: #fff;
   border-radius: 50%;
-  border: 1px solid #000;
   z-index: 1;
   //position: absolute;
   //right: 30%;
