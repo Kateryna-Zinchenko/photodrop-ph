@@ -24,12 +24,15 @@ const Albums = () => {
         const nav = useNavigate();
         const albums = useSelector((state: any) => state.userReducer.albums);
         const isLoading = useSelector((state: any) => state.userReducer.isLoading);
-    const isAuth = useSelector((state: any) => state.userReducer.isAuth);
-    console.log(isAuth)
-    const dispatch = useDispatch<AppDispatch>();
+        const isAuth = useSelector((state: any) => state.userReducer.isAuth);
+        console.log(isAuth)
+        const dispatch = useDispatch<AppDispatch>();
 
         const [isOpen, setIsOpen] = useToggle(false);
 
+        useEffect(() => {
+            if (!albums) dispatch(getAlbums());
+        }, [])
 
         const handleLogoClick = () => {
             nav('/');
@@ -37,6 +40,7 @@ const Albums = () => {
 
         const handleAddClick = () => {
             setIsOpen(true);
+            document.body.style.overflow = 'hidden';
         }
 
         return (

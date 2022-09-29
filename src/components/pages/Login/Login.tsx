@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {AppDispatch} from "../../../App";
 import {setAuthData} from '../../../store/actions/user';
 import {PropagateLoader} from 'react-spinners';
+import {LoaderWrapper} from "../Albums/AlbumsStyles";
 
 const Login = () => {
     const [login, setLogin] = useState<string>("");
@@ -47,15 +48,16 @@ const Login = () => {
                 </LogoWrapper>
                 {
                     isLoading ?
-                        <PropagateLoader color='#3300CC' loading={isLoading}/>
-                        :
+                        <LoaderWrapper>
+                            <PropagateLoader color='#3300CC' loading={isLoading}/>
+                        </LoaderWrapper>                        :
                         <Form>
                             <Input
                                 placeholder='login'
                                 onChange={onLoginChange}
                                 value={login}
                                 type="text"
-                                autoComplete='email'
+                                autoComplete='username'
                             />
                             <Input
                                 placeholder='password'

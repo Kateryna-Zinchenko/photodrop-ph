@@ -40,7 +40,10 @@ const AlbumModal = ({setIsOpen}: Props) => {
         <main className='add-album'>
             <Wrapper>
                 <Form>
-                    <CloseWrapper onClick={() => setIsOpen()}>
+                    <CloseWrapper onClick={() => {
+                        setIsOpen()
+                        document.body.style.overflow = 'unset';
+                    }}>
                         <CloseButton/>
                     </CloseWrapper>
                     <Input

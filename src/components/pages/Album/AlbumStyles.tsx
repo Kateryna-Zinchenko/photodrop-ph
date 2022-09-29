@@ -41,7 +41,6 @@ export const OpenedImageInner = styled.div`
 export const OpenedImage = styled.img`
   max-width: 320px;
   max-height: 320px;
-  border-radius: 20px;
   object-fit: contain;
 
   @media (min-width: 768px) {
@@ -51,6 +50,27 @@ export const OpenedImage = styled.img`
   @media (min-width: 1024px) {
     max-width: 600px;
     max-height: 600px;
+  }
+`;
+
+export const Hover = styled.div`
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+  & div {
+    color: #000;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
   }
 `;
 
@@ -64,8 +84,9 @@ export const SearchWrapper = styled.div<{ isOpenSearch:boolean }>`
   overflow: hidden;
   overflow-y: scroll;
   position: absolute;
-  top: 0;
-  right: -340px;
+  top: 50%;
+  right: 20px;
+  transform: translate(0, -50%);
   border: 1px solid #F1F0EC;
 
   ul {
@@ -230,8 +251,9 @@ export const AddedWrapper = styled.div<{isOpenAdded: boolean, selectedUsers: []}
   overflow: hidden;
   overflow-y: scroll;
   position: absolute;
-  top: 0;
-  right: -340px;
+  top: 50%;
+  right: 20px;
+  transform: translate(0, -50%);
   border: 1px solid #F1F0EC;
 
   ul {
@@ -322,28 +344,52 @@ export const Logo = styled.img`
   margin: 0 auto;
 `;
 
-export const PhotosWrapper = styled.div`
+export const PhotosWrapper = styled.div<{isOpenImg: boolean}>`
+  overflow: ${({isOpenImg}) => isOpenImg && 'hidden'};
   margin: 20px auto 0;
-  padding: 0 20px;
+  max-width: 920px;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 30%;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
 
 export const PhotoWrapper = styled.div`
+  object-fit: cover;
+  max-width: 33.33%;
+  flex: 0 1 33.3333333%;
+  width: 100%;
+  cursor: pointer;
+  margin: 10px 0 0;
   position: relative;
-  width: fit-content;
-  //padding: 0;
+  background: #d3d3d3;
+
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+
+  &:first-child {
+    margin: 10px 0 0;
+  }
+
+  &:hover img {
+    opacity: 0.7;
+  }
+
+  &:hover div {
+    opacity: 1;
+  }
 `;
 
 export const Photo = styled.img`
-  height: 20vw;
-  object-fit: cover;
-  max-width: 600px;
-  flex: 0 1 55%;
-  background: #d3d3d3;
+  //height: 15vw;
   width: 100%;
-  border-radius: 30px;
-  cursor: pointer;
-  margin: 20px 0 0;
-
+  background: #d3d3d3;
+  transition: .5s ease;
+  
+  
 `;
 
 export const Label = styled.label`

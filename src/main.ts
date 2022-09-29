@@ -9,6 +9,7 @@ export const uppy = new Uppy({
 })
 
 const token = TokensLocalStorage.getInstance().getAccessToken();
+let id = window.localStorage.getItem('Id')
 
 uppy.use(AwsS3, {
   getUploadParameters (file: any) {
@@ -46,7 +47,8 @@ uppy.on('upload-success', (file: any) => {
 
 // After all files
 uppy.on('complete', async (result: any) => {
-      console.log(result.successful.map((item: any) => item.meta['key']));
+
+  console.log(result.successful.map((item: any) => item.meta['key']));
       const response = await axios({
         method: 'post',
         headers: {
@@ -56,7 +58,7 @@ uppy.on('complete', async (result: any) => {
         },
         url: 'https://rn2yqv86r0.execute-api.eu-central-1.amazonaws.com/dev/phgraphs/photos/',
         data: {
-          albumId: 'edf0e470-4956-413b-8bd1-53650f8580d4',
+          albumId: id,
           keys: result.successful.map((item: any) => item.meta['key'])
         }
       });

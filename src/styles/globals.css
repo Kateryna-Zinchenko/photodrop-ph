@@ -49,14 +49,15 @@
 
 @media (min-width: 1024px) {
     .uppy-Dashboard-inner {
-        width: 100% !important;
-        height: 92vh !important;
+        max-width: 920px !important;
+        height: 50vh !important;
+        margin: 0 auto;
     }
 }
 
 .uppy-Dashboard-inner {
     width: 100% !important;
-    height: 93vh !important;
+    height: 50vh !important;
 
 }
 
@@ -106,4 +107,8 @@
 
 .uppy-DashboardTab-btn {
     width: unset;
+}
+
+body {
+    overflow: hidden;
 }
