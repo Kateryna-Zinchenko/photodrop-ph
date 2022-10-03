@@ -4,7 +4,7 @@ import {useToggle} from 'react-use';
 import {
     AddedWrapper,
     ArrowBack,
-    Button, CloseButton1,
+    Button, Button1, CloseButton1,
     CloseButton2,
     CloseButton4, CloseWrapper1,
     CLoseWrapper2,
@@ -33,6 +33,7 @@ import SelectedPeople from "./SelectedPeople";
 import {PropagateLoader} from 'react-spinners';
 import {LoaderWrapper} from "../Albums/AlbumsStyles";
 import TokensLocalStorage from "../../../utils/local-storage/TokensLocalStorage";
+import DoneTick from "./DoneTick";
 
 const Album = () => {
     const [isOpenImg, setIsOpenImg] = useToggle(false);
@@ -145,6 +146,15 @@ const Album = () => {
                     </SelectedWrapper>
                     {
                         openedImage &&
+                        // <DoneTick selectedUsers={selectedUsers}
+                        //     onClick={() => {
+                        //         const usersId = selectedUsers && selectedUsers.map((user: any) => {
+                        //             return user.id
+                        //         })
+                        //         onSaveClick(params.id as string, openedImage.id, usersId)
+                        //         dispatch(getUploadedPhotos(params.id as string));
+                        //         setReload(true)
+                        //     }}/>
                         <Button
                             selectedUsers={selectedUsers}
                             onClick={() => {
@@ -179,7 +189,7 @@ const Album = () => {
                             <div>Users haven't been tagged yet</div>
                         }
                     </ul>
-                    <Button selectedUsers={selectedUsers}
+                    <Button1 selectedUsers={selectedUsers}
                             onClick={() => {
                                 const usersId = selectedUsers && selectedUsers.map((user: any) => {
                                     return user.id
@@ -188,7 +198,7 @@ const Album = () => {
                                 setReload(true)
                             }}>
                         Save
-                    </Button>
+                    </Button1>
                 </AddedWrapper>
             </OpenedImageWrapper>
 

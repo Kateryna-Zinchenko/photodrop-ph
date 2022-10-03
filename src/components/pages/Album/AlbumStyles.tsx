@@ -350,8 +350,8 @@ export const Button = styled.button<{selectedUsers: []}>`
   display: ${({selectedUsers}) => selectedUsers.length === 0 ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 28px;
+  width: 60px;
+  height: 26px;
   margin: 0 auto;
   font-family: 'Futura PT Medium',serif;
   font-style: normal;
@@ -365,9 +365,16 @@ export const Button = styled.button<{selectedUsers: []}>`
   border: none;
   cursor: pointer;
   position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translate(-50%, 0);
+  top: 5px;
+  right: 15px;
+`;
+
+
+export const Button1 = styled(Button)<{selectedUsers: []}>`
+  top: unset;
+  right: 50%;
+  bottom: 15px;
+  transform: translate(50%, 0);
 `;
 
 export const LogoWrapper = styled.div`
