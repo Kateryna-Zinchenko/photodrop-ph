@@ -3,6 +3,7 @@ import { createReducerFunction, ImmerReducer } from "immer-reducer";
 interface UserState {
   isLoading: boolean;
   isAuth: boolean;
+  isAssigned: boolean;
   user: {
     id: string | null;
     phone: string | null;
@@ -18,6 +19,7 @@ interface UserState {
 const initialState: UserState = {
   isLoading: false,
   isAuth: false,
+  isAssigned: false,
   user: {
     id: null,
     phone: null,
@@ -58,6 +60,10 @@ export class User extends ImmerReducer<UserState> {
 
   setUploadedPhotos(photos: any) {
     this.draftState.photos = photos;
+  }
+
+  setAssigned(isAssigned: boolean) {
+    this.draftState.isAssigned = isAssigned;
   }
 
   // setAlbum(album: { title: null, location: null, date: null, id: null }) {

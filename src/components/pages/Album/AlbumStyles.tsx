@@ -100,6 +100,30 @@ export const SearchWrapper = styled.div<{ isOpenSearch:boolean }>`
     justify-content: space-between;
     align-items: center;
   }
+  
+  @media (min-width: 375px) {
+    width: 300px;
+    height: 200px;
+    top: unset;
+    bottom: 27px;
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+  
+  @media (min-width: 1280px) {
+    width: 300px;
+    height: 280px;
+    background: #fff;
+    border-radius: 8px;
+    z-index: 2;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translate(0, -50%);
+    border: 1px solid #F1F0EC;
+  }
 `;
 
 export const CLoseWrapper2 = styled.div`
@@ -115,8 +139,8 @@ export const CLoseWrapper2 = styled.div`
   cursor: pointer;
 `;
 
-export const CLoseWrapper4 = styled.div<{ selectedUsers: [] }>`
-  display: ${({selectedUsers}) => selectedUsers.length !== 0 ? 'flex' : 'none'};
+export const CLoseWrapper4 = styled.div<{ assigned: boolean }>`
+  display: ${({assigned}) => assigned ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   width: 16px;
@@ -170,7 +194,7 @@ export const CloseButton4 = styled(CloseButton2)`
 
 export const Header = styled.div`
   width: 100%;
-  padding: 26px 15px 18px 15px;
+  padding: 36px 15px 18px 15px;
   border-bottom: 1px solid #F1F0EC;
   background: #fff;
   border-radius: 8px 8px 0 0;
@@ -269,6 +293,32 @@ export const AddedWrapper = styled.div<{isOpenAdded: boolean, selectedUsers: []}
     line-height: 21px;
     text-align: center;
   }
+
+
+
+  @media (min-width: 375px) {
+    width: 300px;
+    height: 200px;
+    top: unset;
+    bottom: 27px;
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+
+  @media (min-width: 1280px) {
+    width: 300px;
+    height: 280px;
+    background: #fff;
+    border-radius: 8px;
+    z-index: 2;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translate(0, -50%);
+    border: 1px solid #F1F0EC;
+  }
 `;
 
 export const AddedText = styled.div<{assigned: boolean}>`
@@ -277,8 +327,8 @@ export const AddedText = styled.div<{assigned: boolean}>`
 
 export const SelectedWrapper = styled.div`
   position: absolute;
-  right: 0;
-  bottom: 0;
+  left: -10px;
+  top: -5px;
   //transform: translate(0, 50%);
   cursor: pointer;
 `;
@@ -347,11 +397,11 @@ export const Logo = styled.img`
 export const PhotosWrapper = styled.div<{isOpenImg: boolean}>`
   overflow: ${({isOpenImg}) => isOpenImg && 'hidden'};
   margin: 20px auto 0;
-  max-width: 920px;
+  max-width: 1024px;
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 30%;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 `;
 

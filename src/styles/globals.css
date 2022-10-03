@@ -22,43 +22,18 @@
     font-style: normal;
 }
 
-/*.uppy-u-reset,*/
-/*.uppy-DragDrop-container,*/
-/*.uppy-DragDrop--isDragDropSupported {*/
-/*    width: 345px !important;*/
-/*    height: 50px !important;*/
-/*    opacity: 0 !important;*/
-/*    position: fixed !important;*/
-/*    bottom: 0 !important;*/
-/*    left: 50% !important;*/
-/*    transform: translate(-50%,0%) !important;*/
-/*    border-radius: 50px !important;*/
-/*}*/
-
-/*.uppy-DragDrop-inner {*/
-/*    padding: 0 !important;*/
-/*}*/
-
-/*.uppy-DragDrop-label {*/
-/*    display: none !important;*/
-/*}*/
-
-/*.uppy-DragDrop-arrow {*/
-/*    display: none !important;*/
-/*}*/
 
 @media (min-width: 1024px) {
     .uppy-Dashboard-inner {
-        max-width: 920px !important;
-        height: 50vh !important;
+        max-width: 1024px !important;
+        max-height: 30vh !important;
         margin: 0 auto;
     }
 }
 
 .uppy-Dashboard-inner {
     width: 100% !important;
-    height: 50vh !important;
-
+    height: 35vh !important;
 }
 
 .uppy-DashboardTab-btn {
@@ -109,6 +84,106 @@
     width: unset;
 }
 
-body {
-    overflow: hidden;
+.uppy-Dashboard-inner {
+    background: #FFFFFF !important;
 }
+
+.uppy-size--height-md .uppy-Dashboard-AddFiles-info {
+    display: none;
+}
+
+.uppy-size--md .uppy-Dashboard-AddFiles-title {
+    font-size: 1px;
+    color: #3300CC;
+    display: block;
+    width: 345px;
+    height: 50px;
+    margin: 20px auto 0;
+    padding: 14px 0;
+    font-family: 'Futura PT Light', serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 23px;
+    text-align: center;
+    background: #3300CC;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.uppy-size--md .uppy-Dashboard-AddFiles-title button {
+    font-size: 22px;
+    width: 345px;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: none;
+    color: #fff;
+}
+
+.uppy-Dashboard-AddFiles-list {
+    display: none;
+}
+
+.uppy-Dashboard-AddFiles-title button {
+    font-size: 16px;
+}
+
+.uppy-Dashboard-browse:focus, .uppy-Dashboard-browse:hover {
+    border-bottom: none;
+}
+
+@media (max-width: 578px) {
+    .uppy-Dashboard-AddFiles-title {
+        font-size: 1px;
+        color: #3300CC;
+        display: block;
+        width: 345px;
+        height: 50px;
+        margin: 20px auto 0;
+        padding: 14px 0;
+        font-family: 'Futura PT Light', serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 23px;
+        text-align: center;
+        background: #3300CC;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    .uppy-Dashboard-inner {
+        background: #FFFFFF !important;
+    }
+
+    .uppy-Dashboard-AddFiles-title button {
+        font-size: 18px;
+        width: 345px;
+        height: 50px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        border: none;
+        color: #fff;
+    }
+
+    .uppy-Dashboard-browse:focus, .uppy-Dashboard-browse:hover {
+        border-bottom: none;
+    }
+}
+
+/*body {*/
+/*    overflow: hidden;*/
+/*}*/

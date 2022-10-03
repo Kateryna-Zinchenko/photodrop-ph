@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
   width: 50px;
   height: 50px;
   opacity: 1;
-  background: #fff;
+  //background: #fff;
   border-radius: 50%;
   z-index: 1;
   //position: absolute;

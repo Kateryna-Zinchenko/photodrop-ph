@@ -11,7 +11,9 @@ export type UserActions = ReturnType<
     | typeof userActions.setUsers
     | typeof userActions.setUser
     | typeof userActions.setUploadedPhotos
-    | typeof userActions.setLoading>
+    | typeof userActions.setLoading
+    | typeof userActions.setAssigned
+    >
 
 export const setLoading = (loading: boolean) =>
     (dispatch: any) => {
@@ -39,6 +41,7 @@ export const setAuthData =
                 }
             } catch (e: any) {
                 console.log(e)
+                dispatch(setLoading(false));
             }
         };
 
@@ -119,14 +122,21 @@ export const getUploadedPhotos =
             }
         };
 
-// export const addSelectedUsers =
-//     (albumId: string, orders: [{photoId: string, userId: string}]): AsyncAction =>
-//         async (dispatch, _, {mainProtectedApi}) => {
-//             try {
-//                 const data = {albumId: albumId, orders: [{photoId: photoId, userId: userId}]};
-//                 const response = await mainProtectedApi.addSelectedUsers(data);
-//
-//             } catch (e: any){
-//                 dispatch(e)
-//             }
-// }
+export const addSelectedUsers =
+    (albumId: string, photoId: string, users: Array<string>): AsyncAction =>
+        async (dispatch, _, {mainProtectedApi}) => {
+            try {
+                let orders = [{
+                    photoId: photoId,
+                    users: users
+                }]
+                const data = {albumId: albumId, orders: orders};
+                //dispatch(setLoading(true));
+                await mainProtectedApi.addSelectedUsers(data);
+                //dispatch(setLoading(false));
+                dispatch(userActions.setUploadedPhotos(null));
+                dispatch(userActions.setAssigned(true));
+            } catch (e: any){
+                console.log(e)
+            }
+}

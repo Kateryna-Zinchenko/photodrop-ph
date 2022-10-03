@@ -25,7 +25,7 @@ import {
 } from './AlbumStyles';
 import {AppDispatch} from "../../../App";
 import {useDispatch, useSelector} from 'react-redux';
-import {getAlbums, getUploadedPhotos, getUsers} from "../../../store/actions/user";
+import {addSelectedUsers, getAlbums, getUploadedPhotos, getUsers} from "../../../store/actions/user";
 import {Dashboard} from '@uppy/react';
 import {uppy} from "../../../main";
 import AddPeople from "./AddPeople";
@@ -35,10 +35,11 @@ import {LoaderWrapper} from "../Albums/AlbumsStyles";
 import TokensLocalStorage from "../../../utils/local-storage/TokensLocalStorage";
 
 const Album = () => {
-    const [openedImage, setOpenedImage] = useState<string>('');
     const [isOpenImg, setIsOpenImg] = useToggle(false);
     const [isOpenSearch, setIsOpenSearch] = useToggle(false);
     const [isOpenAdded, setIsOpenAdded] = useToggle(false);
+    const [reload, setReload] = useToggle(false);
+    const [openedImage, setOpenedImage] = useState<any>();
     const [selectedUsers, setSelectedUsers] = useState<any>([]);
 
     const nav = useNavigate();
@@ -53,14 +54,11 @@ const Album = () => {
         dispatch(getUsers(params.id as string));
         dispatch(getUploadedPhotos(params.id as string));
 
-        window.localStorage.setItem('Id', params.id as string)
+        if (reload) {
+            dispatch(getUploadedPhotos(params.id as string));
+        }
 
-        if (isOpenImg === true) {
-            document.body.style.overflow = 'hidden';
-        }
-        if (isOpenImg === false){
-            document.body.style.overflow = 'unset';
-        }
+        window.localStorage.setItem('Id', params.id as string);
     }, [])
 
     const handleLogoClick = () => {
@@ -90,10 +88,13 @@ const Album = () => {
         setSelectedUsers([...selectedUsers, user]);
     }
 
-    // const onSaveClick = () => {
-    //     dispatch(addSelectedUsers())
-    // }
-
+    const onSaveClick = (albumId: string, photoId: string, users: Array<string>) => {
+        dispatch(addSelectedUsers(albumId, photoId, users));
+        setIsOpenImg(false)
+        setIsOpenSearch(false);
+        setIsOpenAdded(false);
+        setSelectedUsers([]);
+    }
 
     return (
         <main className='album'>
@@ -109,15 +110,13 @@ const Album = () => {
                     <CloseButton1/>
                 </CloseWrapper1>
                 <OpenedImageInner>
-                    <OpenedImage src={openedImage}/>
+                    {
+                        openedImage &&
+                        <OpenedImage src={openedImage.url}/>
+                    }
                 </OpenedImageInner>
 
                 <SearchWrapper isOpenSearch={isOpenSearch}>
-                    {/*<CLoseWrapper2 onClick={() => {*/}
-                    {/*    setIsOpenSearch(false)*/}
-                    {/*}}>*/}
-                    {/*    <CloseButton2/>*/}
-                    {/*</CLoseWrapper2>*/}
                     <Header>
                         <SearchInput placeholder='Search' onChange={inputHandler}/>
                     </Header>
@@ -130,7 +129,7 @@ const Album = () => {
                                         onAddUserClick(user)}>
                                     {user.phone}
                                 </Li>
-                                <CLoseWrapper4 selectedUsers={selectedUsers} onClick={() => {
+                                <CLoseWrapper4 assigned={selectedUsers.includes(user)} onClick={() => {
                                     setSelectedUsers(selectedUsers.filter((e: any) => e !== user))
                                 }}>
                                     <CloseButton4/>
@@ -144,7 +143,21 @@ const Album = () => {
                             {selectedUsers.length}
                         </Count>
                     </SelectedWrapper>
-                    <Button selectedUsers={selectedUsers}>Save</Button>
+                    {
+                        openedImage &&
+                        <Button
+                            selectedUsers={selectedUsers}
+                            onClick={() => {
+                                const usersId = selectedUsers && selectedUsers.map((user: any) => {
+                                    return user.id
+                                })
+                                onSaveClick(params.id as string, openedImage.id, usersId)
+                                dispatch(getUploadedPhotos(params.id as string));
+                                setReload(true)
+                            }}>
+                            Save
+                        </Button>
+                    }
                 </SearchWrapper>
                 <AddedWrapper selectedUsers={selectedUsers} isOpenAdded={isOpenAdded}>
                     <CLoseWrapper2 onClick={() => {
@@ -157,7 +170,7 @@ const Album = () => {
                             selectedUsers.map((user: any) =>
                                 <Item key={user.id}>
                                     {user.phone}
-                                    <CLoseWrapper4 selectedUsers={selectedUsers} onClick={() => {
+                                    <CLoseWrapper4 assigned={selectedUsers} onClick={() => {
                                         setSelectedUsers(selectedUsers.filter((e: any) => e !== user))
                                     }}>
                                         <CloseButton4/>
@@ -166,67 +179,17 @@ const Album = () => {
                             <div>Users haven't been tagged yet</div>
                         }
                     </ul>
-                    <Button selectedUsers={selectedUsers}>
+                    <Button selectedUsers={selectedUsers}
+                            onClick={() => {
+                                const usersId = selectedUsers && selectedUsers.map((user: any) => {
+                                    return user.id
+                                })
+                                onSaveClick(params.id as string, openedImage.id, usersId)
+                                setReload(true)
+                            }}>
                         Save
                     </Button>
                 </AddedWrapper>
-                {/*<SearchWrapper isOpenSearch={isOpenSearch}>*/}
-                {/*    <CLoseWrapper2 onClick={() => {*/}
-                {/*        setIsOpenSearch(false)*/}
-                {/*    }}>*/}
-                {/*        <CloseButton2/>*/}
-                {/*    </CLoseWrapper2>*/}
-                {/*    <Header>*/}
-                {/*        <SearchInput placeholder='Search' onChange={inputHandler}/>*/}
-                {/*    </Header>*/}
-                {/*    <ul>*/}
-                {/*        {filteredData && filteredData.map((user: any) =>*/}
-                {/*            <Li key={user.id}*/}
-                {/*                assigned={selectedUsers.includes(user)}*/}
-                {/*                onClick={() => selectedUsers.includes(user) ? alert('User already exists') :*/}
-                {/*                    onAddUserClick(user)}>*/}
-                {/*                {user.phone}*/}
-                {/*                <AddedText assigned={selectedUsers.includes(user)}>*/}
-                {/*                    added*/}
-                {/*                </AddedText>*/}
-                {/*            </Li>*/}
-                {/*        )}*/}
-                {/*    </ul>*/}
-                {/*</SearchWrapper>*/}
-                {/*<div onClick={() => setIsOpenSearch(true)}>*/}
-                {/*    <AddPeople/>*/}
-                {/*</div>*/}
-
-                {/*<Button position bottom='20px' background='#fff' color='#5C5C5C' z_index='2'>Save</Button>*/}
-
-                {/*<AddedWrapper isOpenAdded={isOpenAdded}>*/}
-                {/*    <CLoseWrapper2 onClick={() => {*/}
-                {/*        setIsOpenAdded(false)*/}
-                {/*    }}>*/}
-                {/*        <CloseButton2/>*/}
-                {/*    </CLoseWrapper2>*/}
-                {/*    <ul>*/}
-                {/*        {selectedUsers.length > 0 ?*/}
-                {/*            selectedUsers.map((user: any) =>*/}
-                {/*                <Item key={user.id}>*/}
-                {/*                {user.phone}*/}
-                {/*                    <CLoseWrapper4 onClick={() => {*/}
-                {/*                        setSelectedUsers(selectedUsers.filter((e: any) => e !== user))*/}
-                {/*                    }}>*/}
-                {/*                        <CloseButton4/>*/}
-                {/*                    </CLoseWrapper4>*/}
-                {/*                </Item>) :*/}
-                {/*            <div>Users not added</div>*/}
-                {/*        }*/}
-                {/*    </ul>*/}
-                {/*</AddedWrapper>*/}
-
-                {/*<SelectedWrapper onClick={() => setIsOpenAdded()}>*/}
-                {/*    <SelectedPeople/>*/}
-                {/*    <Count>*/}
-                {/*        {selectedUsers.length}*/}
-                {/*    </Count>*/}
-                {/*</SelectedWrapper>*/}
             </OpenedImageWrapper>
 
             <LogoWrapper>
@@ -255,44 +218,24 @@ const Album = () => {
                                         }}>
                                             <Photo src={photo.url} onClick={() => {
                                                 setIsOpenImg(true);
-                                                setOpenedImage(photo.url);
+                                                setOpenedImage(photo);
                                                 setIsOpenSearch(true);
                                             }
                                             }/>
                                             <Hover onClick={() => setIsOpenImg(true)}>
                                                 <div onClick={() => {
                                                     setIsOpenImg(true);
-                                                    setOpenedImage(photo.url);
+                                                    setOpenedImage(photo);
                                                     setIsOpenSearch(true);
                                                 }}>
                                                     <AddPeople/>
                                                 </div>
                                             </Hover>
                                         </PhotoWrapper>
-
                                     )
                                 })
                             }
                         </PhotosWrapper>
-                        {/*<Images>*/}
-                        {/*    {selectedImages && selectedImages.map((image: any) => {*/}
-                        {/*        return (*/}
-                        {/*            <ImgWrapper key={image}>*/}
-                        {/*                <CloseWrapper onClick={() => {*/}
-                        {/*                    setSelectedImages(selectedImages.filter((e: any) => e !== image))*/}
-                        {/*                }}>*/}
-                        {/*                    <CloseButton/>*/}
-                        {/*                </CloseWrapper>*/}
-                        {/*                <Img key={image} src={image}*/}
-                        {/*                     onClick={() => {*/}
-                        {/*                         setIsOpenImg()*/}
-                        {/*                         setOpenedImages(selectedImages.filter((e: any) => e === image))*/}
-                        {/*                     }}*/}
-                        {/*                />*/}
-                        {/*            </ImgWrapper>*/}
-                        {/*        )*/}
-                        {/*    })}*/}
-                        {/*</Images>*/}
                     </div>
             }
         </main>
