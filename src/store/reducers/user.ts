@@ -14,6 +14,7 @@ interface UserState {
   users: any;
   albums: any;
   photos: any;
+  error: any
 }
 
 const initialState: UserState = {
@@ -30,6 +31,7 @@ const initialState: UserState = {
   users: null,
   albums: null,
   photos: null,
+  error: null
 };
 
 
@@ -66,12 +68,10 @@ export class User extends ImmerReducer<UserState> {
     this.draftState.isAssigned = isAssigned;
   }
 
-  // setAlbum(album: { title: null, location: null, date: null, id: null }) {
-  //   this.draftState.album.name = album.title;
-  //   this.draftState.album.location = album.location;
-  //   this.draftState.album.date = album.date;
-  //   this.draftState.album.id = album.id;
-  // }
+  setError(error: any) {
+    this.draftState.error = error;
+  }
+
 }
 
 export default createReducerFunction(User, initialState);

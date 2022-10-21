@@ -9,6 +9,7 @@ const ProtectedRoute = ({children}: any) => {
     const dispatch = useDispatch<any>();
     const nav = useNavigate();
     const token = TokensLocalStorage.getInstance().getAccessToken()
+
     if (!token){
         return <Navigate to='/login'/>
     }

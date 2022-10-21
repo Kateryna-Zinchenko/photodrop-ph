@@ -13,11 +13,17 @@ export type UserActions = ReturnType<
     | typeof userActions.setUploadedPhotos
     | typeof userActions.setLoading
     | typeof userActions.setAssigned
+    | typeof userActions.setError
     >
 
 export const setLoading = (loading: boolean) =>
     (dispatch: any) => {
         dispatch(userActions.setLoading(loading))
+    };
+
+export const setError = (error: any) =>
+    (dispatch: any) => {
+        dispatch(userActions.setError(error))
     };
 
 export const setAuthData =
@@ -40,7 +46,7 @@ export const setAuthData =
                     console.log('error')
                 }
             } catch (e: any) {
-                console.log(e)
+                dispatch(userActions.setError(e))
                 dispatch(setLoading(false));
             }
         };
@@ -65,8 +71,6 @@ export const getAlbums =
                 dispatch(userActions.setAlbums(response));
                 dispatch(setLoading(false));
                 dispatch(setAuth(true));
-
-
             } catch (e: any) {
                 TokensLocalStorage.getInstance().clear();
                 window.location.replace('/login');

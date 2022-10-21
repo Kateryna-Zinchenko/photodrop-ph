@@ -34,6 +34,7 @@ import {PropagateLoader} from 'react-spinners';
 import {LoaderWrapper} from "../Albums/AlbumsStyles";
 import TokensLocalStorage from "../../../utils/local-storage/TokensLocalStorage";
 import DoneTick from "./DoneTick";
+import {State} from "../../../store";
 
 const Album = () => {
     const [isOpenImg, setIsOpenImg] = useToggle(false);
@@ -47,9 +48,9 @@ const Album = () => {
     const params = useParams();
     const dispatch = useDispatch<AppDispatch>();
 
-    const users = useSelector((state: any) => state.userReducer.users);
-    const photos = useSelector((state: any) => state.userReducer.photos);
-    const isLoading = useSelector((state: any) => state.userReducer.isLoading);
+    const users = useSelector((state: State) => state.userReducer.users);
+    const photos = useSelector((state: State) => state.userReducer.photos);
+    const isLoading = useSelector((state: State) => state.userReducer.isLoading);
 
     useEffect(() => {
         dispatch(getUsers(params.id as string));

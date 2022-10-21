@@ -77,6 +77,7 @@ export const Input = styled.input`
   align-items: center;
   color: #262626;
   margin: 20px auto 0;
+  user-select: none;
 
   &:first-child {
     margin: 0 auto;
@@ -85,8 +86,4 @@ export const Input = styled.input`
   @media (min-width: 1020px) {
     width: 500px;
   }
-`;
-
-export const DatePicker = styled(Input)`
-  
 `;

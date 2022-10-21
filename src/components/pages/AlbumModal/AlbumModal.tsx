@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Button from '../../common/button/Button';
-import {DatePicker, Form, Input, Wrapper} from './AlbumModalStyles';
+import {Form, Input, Wrapper} from './AlbumModalStyles';
 import {addAlbum, getAlbums} from "../../../store/actions/user";
 import {AppDispatch} from "../../../App";
 import { useDispatch } from 'react-redux';
@@ -56,7 +56,7 @@ const AlbumModal = ({setIsOpen}: Props) => {
                         placeholder='Location'
                         onChange={onLocationChange}
                     />
-                    <DatePicker
+                    <Input
                         type='date'
                         placeholder='Datepicker'
                         onChange={onDateChange}

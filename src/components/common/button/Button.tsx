@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type Props = {
     children: React.ReactNode;
+    disabled?: any;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     position?: boolean,
     margin?: string,
@@ -18,6 +19,7 @@ type Props = {
 
 const Button = ({
                     children,
+                    disabled,
                     onClick,
                     position,
                     margin,
@@ -31,7 +33,7 @@ const Button = ({
                     z_index
                 }: Props) => {
     return (
-        <Wrapper onClick={onClick} position={position} margin={margin} bottom={bottom} transform={transform}
+        <Wrapper disabled={disabled} onClick={onClick} position={position} margin={margin} bottom={bottom} transform={transform}
                  left={left} color={color} background={background} border={border} cursorNone={cursorNone}
                  z_index={z_index}
         >
@@ -65,7 +67,12 @@ const Wrapper = styled.button<Props>`
   transform: ${({transform}) => transform ? transform : 'unset'};
   z-index: ${({z_index}) => z_index ? z_index : 'unset'};
   
-  @media (max-width: 425px) {
-    width: 175px;
+  &:hover {
+    background: ${({background}) => background ? background : '#2d00ad'};
+    transition: 0.3s;
   }
+  
+  //@media (max-width: 425px) {
+  //  width: 175px;
+  //}
 `;

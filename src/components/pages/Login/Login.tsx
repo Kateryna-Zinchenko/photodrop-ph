@@ -1,23 +1,34 @@
 import React, {useEffect, useState} from 'react';
-import {Form, Input, Logo, LogoWrapper, Wrapper} from "./LoginStyles";
+import {ErrorCaption, Form, Input, Logo, LogoWrapper, Wrapper} from "./LoginStyles";
 import Button from "../../common/button/Button";
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {AppDispatch} from "../../../App";
-import {setAuthData} from '../../../store/actions/user';
+import {setAuthData, setError} from '../../../store/actions/user';
 import {PropagateLoader} from 'react-spinners';
 import {LoaderWrapper} from "../Albums/AlbumsStyles";
+import {State} from "../../../store";
 
 const Login = () => {
-    const [login, setLogin] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [login, setLogin] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [errorString, setErrorString] = useState<string>('')
+    const [disabled, setDisabled] = useState<boolean>(true)
+
+    const errors = ['Enter login and password', 'Incorrect login or password'];
+
     const dispatch = useDispatch<AppDispatch>();
     const nav = useNavigate();
-    const isAuth = useSelector((state: any) => state.userReducer.isAuth);
-    const isLoading = useSelector((state: any) => state.userReducer.isLoading);
+
+    const isAuth = useSelector((state: State) => state.userReducer.isAuth);
+    const isLoading = useSelector((state: State) => state.userReducer.isLoading);
+    const error = useSelector((state: State) => state.userReducer.error);
 
     const onLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
         setLogin(e.currentTarget.value);
+        if (e.currentTarget.value !== '') {
+            setDisabled(false)
+        }
     };
 
     const onPasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -25,7 +36,14 @@ const Login = () => {
     };
 
     const onSignInClick = async () => {
-        await dispatch(setAuthData(login, password));
+        if (login.length || password.length === 0) {
+            dispatch(setError(null));
+            setErrorString(errors[0]);
+        }
+        if (login.length || password.length !== 0) {
+            setErrorString('');
+            await dispatch(setAuthData(login, password));
+        }
     };
 
     const handleClick = () => {
@@ -33,12 +51,10 @@ const Login = () => {
     }
 
     useEffect(() => {
-            if (isAuth) {
-                nav('/');
-            }
+        if (isAuth) {
+            nav('/');
         }
-    )
-
+    }, [isAuth])
 
     return (
         <main className='login'>
@@ -50,7 +66,7 @@ const Login = () => {
                     isLoading ?
                         <LoaderWrapper>
                             <PropagateLoader color='#3300CC' loading={isLoading}/>
-                        </LoaderWrapper>                        :
+                        </LoaderWrapper> :
                         <Form>
                             <Input
                                 placeholder='login'
@@ -58,6 +74,9 @@ const Login = () => {
                                 value={login}
                                 type="text"
                                 autoComplete='username'
+                                spellCheck='false'
+                                errorString={errorString}
+                                error={error}
                             />
                             <Input
                                 placeholder='password'
@@ -65,11 +84,21 @@ const Login = () => {
                                 value={password}
                                 type="password"
                                 autoComplete='current-password'
+                                spellCheck='false'
+                                errorString={errorString}
+                                error={error}
                             />
-                            <Button onClick={onSignInClick}>Sign in</Button>
+                            <Button onClick={onSignInClick}
+                                    disabled={disabled}
+                            >
+                                Sign in
+                            </Button>
+                            <ErrorCaption>
+                                {error ? 'Incorrect login or password' :
+                                    errorString !== '' && errorString}
+                            </ErrorCaption>
                         </Form>
                 }
-
             </Wrapper>
         </main>
     );

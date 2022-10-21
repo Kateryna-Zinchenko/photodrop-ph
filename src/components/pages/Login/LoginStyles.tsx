@@ -17,18 +17,18 @@ export const Logo = styled.img`
 `;
 
 export const Form = styled.div`
-  margin: 190px auto 0;
+  margin: 220px auto 0;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ errorString:string, error:any }>`
   background: #F4F4F4;
-  border: 1px solid #EEEEEE;
+  border: ${({errorString, error}) => errorString.length === 0 && !error ? '1px solid #EEEEEE' : '1px solid firebrick'};
   border-radius: 10px;
   outline: none;
   padding: 0 13px;
   width: 345px;
   height: 40px;
-  font-family: 'Futura PT Light',serif;
+  font-family: 'Futura PT Light', serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -37,8 +37,20 @@ export const Input = styled.input`
   align-items: center;
   color: #262626;
   margin: 20px auto 0;
-  
+  user-select: none;
+
   &:first-child {
     margin: 0 auto;
   }
+`;
+
+export const ErrorCaption = styled.div`
+  font-family: 'Futura PT Light', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  margin: 14px 0 0;
+  color: firebrick;
 `;
